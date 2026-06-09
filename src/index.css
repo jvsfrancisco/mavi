@@ -1,0 +1,210 @@
+/* ============================================
+   ROADMAP MAVI — Design System & Global Styles
+   Tailwind CSS v4 (CSS-first config)
+   ============================================ */
+
+@import "tailwindcss";
+
+/* ---- Custom Theme Tokens ---- */
+@theme {
+  /* Fontes */
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* Cores do tema — seção por seção */
+  --color-sunset-orange: #F97316;
+  --color-sunset-amber: #F59E0B;
+  --color-sunset-rose: #FB7185;
+  --color-sunset-deep: #1E1B4B;
+  --color-ocean-blue: #0EA5E9;
+  --color-ocean-dark: #0C4A6E;
+  --color-sand-warm: #FDE68A;
+  --color-sand-gold: #D97706;
+
+  /* Glass */
+  --color-glass-white: rgba(255, 255, 255, 0.08);
+  --color-glass-border: rgba(255, 255, 255, 0.15);
+  --color-glass-highlight: rgba(255, 255, 255, 0.25);
+}
+
+/* ---- Base Resets ---- */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    background-color: #0a0a0f;
+  }
+
+  ::selection {
+    background-color: rgba(249, 115, 22, 0.4);
+    color: white;
+  }
+}
+
+/* ---- Glassmorphism Utility ---- */
+@layer components {
+  .glass-card {
+    background: var(--color-glass-white);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 var(--color-glass-highlight);
+  }
+
+  .glass-card-subtle {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Glow decorativo Otimizado */
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--tw-gradient-from) 0%, transparent 70%);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  /* Scrollbar customizada */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* ---- Keyframes para animações de fundo ---- */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(-2deg); }
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.3; }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-wave {
+  animation: wave 12s linear infinite;
+}
+
+/* ---- Mesh Gradient Blob Animations (Aurora) ---- */
+@keyframes mesh-blob-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(5%, 8%) scale(1.05); }
+  50% { transform: translate(-3%, 12%) scale(0.95); }
+  75% { transform: translate(8%, -5%) scale(1.08); }
+}
+
+@keyframes mesh-blob-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-8%, -5%) scale(1.08); }
+  50% { transform: translate(5%, -10%) scale(0.92); }
+  75% { transform: translate(-4%, 7%) scale(1.05); }
+}
+
+@keyframes mesh-blob-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(10%, -8%) scale(0.95); }
+  50% { transform: translate(-6%, 5%) scale(1.1); }
+  75% { transform: translate(3%, -12%) scale(0.98); }
+}
+
+@keyframes mesh-blob-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-6%, 10%) scale(1.05); }
+  50% { transform: translate(8%, -3%) scale(0.9); }
+  75% { transform: translate(-10%, -8%) scale(1.12); }
+}
+
+@keyframes mesh-blob-5 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(7%, 5%) scale(1.06); }
+  66% { transform: translate(-5%, -8%) scale(0.94); }
+}
+
+.mesh-blob-1 { animation: mesh-blob-1 20s ease-in-out infinite; }
+.mesh-blob-2 { animation: mesh-blob-2 25s ease-in-out infinite; }
+.mesh-blob-3 { animation: mesh-blob-3 18s ease-in-out infinite; }
+.mesh-blob-4 { animation: mesh-blob-4 22s ease-in-out infinite; }
+.mesh-blob-5 { animation: mesh-blob-5 28s ease-in-out infinite; }
+
+/* ---- Easter Egg Hint (cursor interativo) ---- */
+.easter-egg-trigger {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.easter-egg-trigger:hover {
+  transform: scale(1.15);
+}
+
+.easter-egg-trigger:active {
+  transform: scale(0.95);
+}
+
+/* ---- Ripple Water (Event 08 — Cachoeira) ---- */
+@keyframes ripple-water {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(25);
+    opacity: 0;
+  }
+}
