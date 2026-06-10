@@ -16,6 +16,7 @@ import Event11_Lagoa from "./sections/Event11_Lagoa";
 import Event12_Formatura from "./sections/Event12_Formatura";
 import Event13_BK from "./sections/Event13_BK";
 import Event14_RioDasOstras from "./sections/Event14_RioDasOstras";
+import Event15_AnoNovo from "./sections/Event15_AnoNovo";
 
 /**
  * App
@@ -132,8 +133,14 @@ export default function App() {
       {/* 🌊 Evento 14 — Rio das Ostras */}
       <Event14_RioDasOstras />
 
+      {/* ── Conector 14 → 15 ── */}
+      <TimelineConnector color="from-sky-500 to-amber-400" fromColor="#060608" toColor="#060608" />
+
+      {/* 🎆 Evento 15 — Ano Novo */}
+      <Event15_AnoNovo />
+
       {/* ── Conector final provisório ── */}
-      <TimelineConnector color="from-sky-500 to-transparent" fromColor="#060608" toColor="#060608" />
+      <TimelineConnector color="from-amber-400 to-transparent" fromColor="#060608" toColor="#060608" />
 
       {/* 📌 Placeholder — Próximos eventos */}
       <section className="min-h-[50vh] flex items-center justify-center">
