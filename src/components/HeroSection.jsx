@@ -2,11 +2,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Heart, ChevronDown } from "lucide-react";
 import { useRef } from "react";
 
-/**
- * HeroSection
- * Tela de abertura — a primeira coisa que ela vê.
- * Título grande + coração animado + seta indicando scroll.
- */
 export default function HeroSection() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -14,7 +9,6 @@ export default function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  // Parallax no título conforme rola
   const titleY = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
@@ -24,17 +18,16 @@ export default function HeroSection() {
       id="hero"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden"
     >
-      {/* ---- Glows de fundo ---- */}
+
       <div className="glow w-[500px] h-[500px] bg-sunset-orange/20 -top-20 -left-20 absolute" />
       <div className="glow w-[400px] h-[400px] bg-sunset-rose/15 bottom-20 right-10 absolute" />
       <div className="glow w-[600px] h-[600px] bg-purple-600/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute" />
 
-      {/* ---- Conteúdo Central ---- */}
       <motion.div
         className="relative z-10 text-center px-6"
         style={{ y: titleY, opacity: titleOpacity }}
       >
-        {/* Coração animado */}
+
         <motion.div
           className="mx-auto mb-8"
           initial={{ scale: 0, rotate: -180 }}
@@ -62,7 +55,6 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Subtítulo acima */}
         <motion.p
           className="font-sans text-sm md:text-base tracking-[0.3em] uppercase text-white/50 mb-4"
           initial={{ opacity: 0, y: 20 }}
@@ -72,7 +64,6 @@ export default function HeroSection() {
           Um ano de
         </motion.p>
 
-        {/* Título principal */}
         <motion.h1
           className="font-display text-5xl md:text-7xl lg:text-8xl font-black leading-tight"
           initial={{ opacity: 0, y: 40 }}
@@ -84,7 +75,6 @@ export default function HeroSection() {
           </span>
         </motion.h1>
 
-        {/* Subtítulo abaixo */}
         <motion.p
           className="font-sans text-lg md:text-xl text-white/40 mt-6 max-w-md mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
@@ -94,11 +84,9 @@ export default function HeroSection() {
           Tudo que a gente viveu nesse primeiro ano. Cada rolê, cada momento.
         </motion.p>
 
-        {/* Espaçamento extra no lugar do texto 'Role para baixo' */}
         <div className="mt-12" />
       </motion.div>
 
-      {/* ---- Seta de scroll animada ---- */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
@@ -113,7 +101,6 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* ---- Partículas flutuantes decorativas ---- */}
       {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}

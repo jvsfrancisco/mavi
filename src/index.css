@@ -1,17 +1,12 @@
-/* ============================================
-   ROADMAP MAVI — Design System & Global Styles
-   Tailwind CSS v4 (CSS-first config)
-   ============================================ */
+
 
 @import "tailwindcss";
 
-/* ---- Custom Theme Tokens ---- */
 @theme {
-  /* Fontes */
+
   --font-display: "Playfair Display", serif;
   --font-sans: "Inter", system-ui, sans-serif;
 
-  /* Cores do tema — seção por seção */
   --color-sunset-orange: #F97316;
   --color-sunset-amber: #F59E0B;
   --color-sunset-rose: #FB7185;
@@ -21,13 +16,11 @@
   --color-sand-warm: #FDE68A;
   --color-sand-gold: #D97706;
 
-  /* Glass */
   --color-glass-white: rgba(255, 255, 255, 0.08);
   --color-glass-border: rgba(255, 255, 255, 0.15);
   --color-glass-highlight: rgba(255, 255, 255, 0.25);
 }
 
-/* ---- Base Resets ---- */
 @layer base {
   * {
     margin: 0;
@@ -52,7 +45,6 @@
   }
 }
 
-/* ---- Glassmorphism Utility ---- */
 @layer components {
   .glass-card {
     background: var(--color-glass-white);
@@ -76,7 +68,6 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
-  /* Glow decorativo Otimizado */
   .glow {
     position: absolute;
     border-radius: 50%;
@@ -85,7 +76,6 @@
     pointer-events: none;
   }
 
-  /* Scrollbar customizada */
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -104,7 +94,6 @@
   }
 }
 
-/* ---- Keyframes para animações de fundo ---- */
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(3deg); }
@@ -142,7 +131,6 @@
   animation: wave 12s linear infinite;
 }
 
-/* ---- Mesh Gradient Blob Animations (Aurora) ---- */
 @keyframes mesh-blob-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   25% { transform: translate(5%, 8%) scale(1.05); }
@@ -183,7 +171,6 @@
 .mesh-blob-4 { animation: mesh-blob-4 22s ease-in-out infinite; }
 .mesh-blob-5 { animation: mesh-blob-5 28s ease-in-out infinite; }
 
-/* ---- Easter Egg Hint (cursor interativo) ---- */
 .easter-egg-trigger {
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -197,7 +184,6 @@
   transform: scale(0.95);
 }
 
-/* ---- Ripple Water (Event 08 — Cachoeira) ---- */
 @keyframes ripple-water {
   0% {
     transform: translate(-50%, -50%) scale(0);

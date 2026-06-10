@@ -1,23 +1,5 @@
 import { motion } from "framer-motion";
 
-/**
- * BentoGrid
- * Layout assimétrico estilo marmita japonesa (bento box).
- * Cada célula entra com efeito stagger animado.
- *
- * Uso:
- * ```jsx
- * <BentoGrid>
- *   <BentoItem span="large">  // 2 colunas
- *   <BentoItem span="tall">   // 2 linhas
- *   <BentoItem>                // 1x1 padrão
- * </BentoGrid>
- * ```
- *
- * @param {object} props
- * @param {React.ReactNode} props.children - BentoItems
- * @param {string} props.className - Classes adicionais
- */
 export function BentoGrid({ children, className = "" }) {
   return (
     <motion.div
@@ -35,15 +17,6 @@ export function BentoGrid({ children, className = "" }) {
   );
 }
 
-/**
- * BentoItem
- * Célula individual do BentoGrid.
- *
- * @param {object} props
- * @param {React.ReactNode} props.children
- * @param {"default"|"large"|"tall"|"wide"} props.span
- * @param {string} props.className
- */
 export function BentoItem({
   children,
   span = "default",

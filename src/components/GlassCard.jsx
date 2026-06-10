@@ -1,21 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 
-/**
- * GlassCard
- * Card com efeito Glassmorphism + Tilt 3D interativo.
- *
- * O card se inclina suavemente seguindo a posição do cursor,
- * com um brilho de luz (sheen) passando pela superfície do vidro.
- *
- * @param {object} props
- * @param {React.ReactNode} props.children
- * @param {string} props.className - Classes adicionais
- * @param {"default"|"subtle"} props.variant - Estilo do glass
- * @param {number} props.delay - Delay da animação de entrada
- * @param {boolean} props.tilt - Ativar efeito tilt 3D (default: true)
- * @param {number} props.tiltStrength - Força da inclinação em graus (default: 8)
- */
 export default function GlassCard({
   children,
   className = "",
@@ -28,20 +13,16 @@ export default function GlassCard({
   const [isHovered, setIsHovered] = useState(false);
   const baseClass = variant === "subtle" ? "glass-card-subtle" : "glass-card";
 
-  // Motion values para tilt — raw
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
 
-  // Suavização spring
   const springConfig = { stiffness: 150, damping: 20, mass: 0.5 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  // Transformar posição do mouse em rotação
   const rotateX = useTransform(smoothY, [0, 1], [tiltStrength, -tiltStrength]);
   const rotateY = useTransform(smoothX, [0, 1], [-tiltStrength, tiltStrength]);
 
-  // Posição do brilho (sheen) no vidro
   const sheenX = useTransform(smoothX, [0, 1], ["-50%", "150%"]);
   const sheenY = useTransform(smoothY, [0, 1], ["-50%", "150%"]);
 
@@ -86,7 +67,7 @@ export default function GlassCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Sheen — brilho de luz que segue o cursor */}
+
       {tilt && (
         <motion.div
           className="pointer-events-none absolute inset-0 rounded-[inherit] z-10 overflow-hidden"
@@ -105,7 +86,6 @@ export default function GlassCard({
         </motion.div>
       )}
 
-      {/* Conteúdo */}
       {children}
     </motion.div>
   );

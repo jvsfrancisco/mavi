@@ -6,10 +6,6 @@ import FloatingItaliano from "../components/FloatingItaliano";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event04_TuttoNhoque
- * 🍝 Date no Tutto Nhoque — Restaurante italiano
- */
 export default function Event04_TuttoNhoque() {
   const sectionRef = useRef(null);
   const moods = ["😤", "😊", "🥰", "😂"];
@@ -21,7 +17,6 @@ export default function Event04_TuttoNhoque() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
   const photo1Scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.88, 1, 1, 0.95]);
@@ -34,7 +29,7 @@ export default function Event04_TuttoNhoque() {
       id="event-04"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background Gradient ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -55,8 +50,7 @@ export default function Event04_TuttoNhoque() {
         <div className="glow w-[450px] h-[450px] bg-red-900/12 bottom-1/3 -left-10 absolute" />
         <div className="glow w-[350px] h-[350px] bg-amber-500/10 top-1/2 left-1/3 absolute" />
         <div className="glow w-[500px] h-[250px] bg-amber-600/8 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute" />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -65,15 +59,13 @@ export default function Event04_TuttoNhoque() {
         />
       </div>
 
-      {/* ---- Elementos SVG Flutuantes ---- */}
       <FloatingItaliano scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo Principal ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-10"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -93,8 +85,6 @@ export default function Event04_TuttoNhoque() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
-        {/* ---- Título com Text Scrubbing ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             <TextScrub
@@ -114,9 +104,8 @@ export default function Event04_TuttoNhoque() {
           </motion.div>
         </div>
 
-        {/* ---- Grid: Texto + Fotos ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* ---- Lado do Texto (esquerda) ---- */}
+
           <div className="flex flex-col gap-6 order-2 lg:order-1">
             <GlassCard className="p-6 md:p-8" delay={0.3}>
               <div className="flex items-center gap-3 mb-4">
@@ -160,7 +149,6 @@ export default function Event04_TuttoNhoque() {
               </div>
             </GlassCard>
 
-            {/* Mini-card + Magnetic Hover */}
             <MagneticElement strength={20}>
               <motion.div
                 className="flex items-center gap-4 glass-card-subtle px-5 py-3"
@@ -180,9 +168,8 @@ export default function Event04_TuttoNhoque() {
             </MagneticElement>
           </div>
 
-          {/* ---- Lado das Fotos (direita — duas fotos empilhadas) ---- */}
           <div className="relative order-1 lg:order-2">
-            {/* Foto principal */}
+
             <motion.div
               style={{ scale: photo1Scale, rotate: photo1Rotate }}
             >
@@ -206,7 +193,6 @@ export default function Event04_TuttoNhoque() {
               </GlassCard>
             </motion.div>
 
-            {/* Foto dela bolada — sobreposta, menor, com rotação */}
             <motion.div
               className="absolute -bottom-4 md:-bottom-8 -right-2 md:-right-8 w-[45%] md:w-[55%] z-20"
               style={{ rotate: photo2Rotate }}

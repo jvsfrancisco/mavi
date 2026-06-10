@@ -1,10 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingBeach
- * Elementos decorativos flutuantes temáticos de praia/viagem:
- * Conchas, sol, gaivota e brilhos.
- */
 export default function FloatingBeach({ scrollProgress }) {
   const y1 = useTransform(scrollProgress, [0, 1], [0, -80]);
   const y2 = useTransform(scrollProgress, [0, 1], [0, -120]);
@@ -16,7 +11,7 @@ export default function FloatingBeach({ scrollProgress }) {
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      {/* ☀️ Sol */}
+
       <motion.div
         className="absolute top-[10%] right-[15%]"
         style={{ y: y1, rotate: rotate1 }}
@@ -27,7 +22,6 @@ export default function FloatingBeach({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🐚 Concha */}
       <motion.div
         className="absolute bottom-[20%] left-[10%]"
         style={{ y: y2, x: x1, rotate: rotate2 }}
@@ -38,7 +32,6 @@ export default function FloatingBeach({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🌊 Onda 1 */}
       <motion.div
         className="absolute top-[30%] left-[12%]"
         style={{ y: y3, x: x2 }}
@@ -48,7 +41,6 @@ export default function FloatingBeach({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🌊 Onda 2 */}
       <motion.div
         className="absolute bottom-[40%] right-[8%]"
         style={{ y: y1, x: x1 }}
@@ -58,7 +50,6 @@ export default function FloatingBeach({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🐦 Gaivota */}
       <motion.div
         className="absolute top-[20%] right-[35%]"
         style={{ y: y2 }}
@@ -68,7 +59,6 @@ export default function FloatingBeach({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✨ Brilho 1 */}
       <motion.div
         className="absolute top-[45%] left-[25%] animate-shimmer"
         style={{ animationDelay: "1s" }}
@@ -78,7 +68,6 @@ export default function FloatingBeach({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✨ Brilho 2 */}
       <motion.div
         className="absolute bottom-[25%] right-[25%] animate-shimmer"
         style={{ animationDelay: "2.5s" }}

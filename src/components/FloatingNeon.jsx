@@ -1,10 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingNeon
- * Elementos decorativos para a festa neon/aniversário.
- * Bolas de luz, raios laser, estrelas neon e confete em SVG.
- */
 export default function FloatingNeon({ scrollProgress }) {
   const y1 = useTransform(scrollProgress, [0, 1], [0, -70]);
   const y2 = useTransform(scrollProgress, [0, 1], [0, -50]);
@@ -13,7 +8,7 @@ export default function FloatingNeon({ scrollProgress }) {
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      {/* 💡 Bola de luz neon (fúcsia) */}
+
       <motion.div
         className="absolute top-[10%] left-[8%] md:left-[12%]"
         style={{ y: y1 }}
@@ -24,7 +19,6 @@ export default function FloatingNeon({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 💡 Bola de luz neon (cyan) */}
       <motion.div
         className="absolute top-[20%] right-[6%] md:right-[10%] animate-float-slow"
         style={{ y: y2 }}
@@ -35,7 +29,6 @@ export default function FloatingNeon({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ⚡ Raio laser diagonal */}
       <motion.div
         className="absolute top-[5%] left-[30%] md:left-[40%]"
         style={{ rotate: rotate1 }}
@@ -45,7 +38,6 @@ export default function FloatingNeon({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✦ Estrela neon 1 */}
       <motion.div
         className="absolute top-[15%] left-[55%] md:left-[60%] animate-shimmer"
         style={{ y: y3 }}
@@ -55,7 +47,6 @@ export default function FloatingNeon({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✦ Estrela neon 2 */}
       <motion.div
         className="absolute bottom-[25%] left-[5%] md:left-[8%] animate-shimmer"
         style={{ animationDelay: "2s" }}
@@ -65,7 +56,6 @@ export default function FloatingNeon({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🎉 Confete flutuante */}
       <motion.div
         className="absolute bottom-[35%] right-[8%] md:right-[15%] animate-float opacity-[0.08]"
         style={{ y: y1 }}
@@ -79,7 +69,6 @@ export default function FloatingNeon({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 💡 Bola de luz neon (lime) */}
       <motion.div
         className="absolute bottom-[15%] left-[20%] md:left-[25%] animate-float-slow"
         style={{ y: y2, animationDelay: "3s" }}

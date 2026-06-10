@@ -5,10 +5,6 @@ import GlassCard from "../components/GlassCard";
 import TextScrub from "../components/TextScrub";
 import FloatingPetropolis from "../components/FloatingPetropolis";
 
-/**
- * Event16_Petropolis
- * 🍓 Segundo Aniversário em Petrópolis (Morango do Vale)
- */
 export default function Event16_Petropolis() {
   const sectionRef = useRef(null);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -28,10 +24,9 @@ export default function Event16_Petropolis() {
     setShowEasterEgg(true);
     setTimeout(() => {
       setShowEasterEgg(false);
-    }, 3500); // Duração da animação
+    }, 3500); 
   };
 
-  // Lista das 7 fotos para facilitar o map no Masonry
   const photos = [
     { src: "/photos/aniversario-2.png", alt: "Colagem Petrópolis" },
     { src: "/photos/aniversario-2.1.png", alt: "Palácio de Cristal" },
@@ -48,7 +43,7 @@ export default function Event16_Petropolis() {
       id="event-16"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -57,17 +52,16 @@ export default function Event16_Petropolis() {
             opacity: 0.9,
           }}
         />
-        {/* Glows: Morango e Serra */}
+
         <div className="glow w-[600px] h-[600px] bg-rose-600/10 top-1/4 -right-20 absolute" />
         <div className="glow w-[500px] h-[500px] bg-emerald-600/10 bottom-0 left-0 absolute" />
         <div className="glow w-[400px] h-[400px] bg-amber-500/5 top-1/3 left-1/4 absolute" />
-        
+
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
 
       <FloatingPetropolis scrollProgress={scrollYProgress} />
 
-      {/* ---- Lightbox das Fotos ---- */}
       <AnimatePresence>
         {selectedPhoto && (
           <motion.div
@@ -90,13 +84,12 @@ export default function Event16_Petropolis() {
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              onClick={(e) => e.stopPropagation()} // Impede que o clique na foto feche
+              onClick={(e) => e.stopPropagation()} 
             />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ---- Easter Egg: Morango Cortado do Talo ---- */}
       <AnimatePresence>
         {showEasterEgg && (
           <motion.div
@@ -105,41 +98,38 @@ export default function Event16_Petropolis() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* O Talo (Videira pendurada do topo) */}
+
             <motion.div
               className="absolute top-0 w-2 h-40 bg-gradient-to-b from-emerald-900 to-emerald-600 rounded-b-full shadow-[0_0_15px_rgba(16,185,129,0.5)]"
               initial={{ y: -160 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             />
-            
-            {/* O Morango amarrado no talo */}
+
             <motion.div
               className="absolute top-[140px] text-[120px] filter drop-shadow-[0_0_20px_rgba(244,63,94,0.6)]"
               initial={{ y: -160, rotate: -5 }}
               animate={{ 
-                y: [0, 0, 1000], // Desce com o talo, fica parado, e depois cai
-                rotate: [-5, 5, -5, 10, 45] // Balança e depois tomba ao cair
+                y: [0, 0, 1000], 
+                rotate: [-5, 5, -5, 10, 45] 
               }}
               transition={{ 
                 duration: 2.5, 
-                times: [0, 0.4, 1], // Fica parado 40% do tempo (enquanto é cortado)
-                delay: 0.6, // Começa depois que o talo desce
+                times: [0, 0.4, 1], 
+                delay: 0.6, 
                 ease: "easeIn" 
               }}
             >
               🍓
             </motion.div>
 
-            {/* Efeito Visual de Corte (Slash) */}
             <motion.div
               className="absolute top-[140px] w-32 h-1 bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,1)] rotate-[-15deg]"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: [0, 1.5, 0], opacity: [0, 1, 0] }}
-              transition={{ duration: 0.3, delay: 1.5 }} // Acontece um pouco antes do morango cair
+              transition={{ duration: 0.3, delay: 1.5 }} 
             />
-            
-            {/* Partículas espirrando do corte */}
+
             <motion.div
               className="absolute top-[140px] w-4 h-4 bg-emerald-400 rounded-full"
               initial={{ scale: 0, x: 0, y: 0, opacity: 0 }}
@@ -160,7 +150,7 @@ export default function Event16_Petropolis() {
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 flex flex-col gap-12"
         style={{ y: y1, opacity }}
       >
-        {/* ---- Header: Título e Badge ---- */}
+
         <div className="flex flex-col items-center text-center">
           <motion.div
             className="flex justify-center mb-6"
@@ -204,10 +194,8 @@ export default function Event16_Petropolis() {
           </motion.div>
         </div>
 
-        {/* ---- Grid Principal (Texto + Masonry) ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
-          {/* Esquerda: Cartão de Texto (Sticky no Desktop) */}
+
           <motion.div
             className="lg:col-span-4 lg:sticky lg:top-32"
             initial={{ opacity: 0, x: -30 }}
@@ -245,7 +233,7 @@ export default function Event16_Petropolis() {
                 </p>
                 <div className="pt-4 flex items-center gap-2">
                   <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
-                  {/* EASTER EGG */}
+
                   <span 
                     className="text-rose-400/60 text-xs select-none flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/5 border border-rose-500/10 cursor-pointer hover:bg-rose-500/20 hover:text-rose-300 transition-colors"
                     onClick={triggerStrawberries}
@@ -259,7 +247,6 @@ export default function Event16_Petropolis() {
             </GlassCard>
           </motion.div>
 
-          {/* Direita: Galeria Masonry CSS */}
           <div className="lg:col-span-8">
             <div className="columns-2 md:columns-3 gap-4 space-y-4">
               {photos.map((photo, i) => (

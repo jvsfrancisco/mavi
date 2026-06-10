@@ -1,10 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingNamoro
- * Elementos decorativos para o pedido de namoro.
- * Corações, anéis, estrelas e borboletas em SVG.
- */
 export default function FloatingNamoro({ scrollProgress }) {
   const y1 = useTransform(scrollProgress, [0, 1], [0, -60]);
   const y2 = useTransform(scrollProgress, [0, 1], [0, -80]);
@@ -13,7 +8,7 @@ export default function FloatingNamoro({ scrollProgress }) {
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      {/* ❤️ Coração 1 */}
+
       <motion.div
         className="absolute top-[10%] right-[8%] md:right-[14%]"
         style={{ y: y1, rotate: heartRotate }}
@@ -23,7 +18,6 @@ export default function FloatingNamoro({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ❤️ Coração 2 (menor) */}
       <motion.div
         className="absolute top-[25%] left-[5%] md:left-[10%] animate-float-slow"
         style={{ y: y2 }}
@@ -33,7 +27,6 @@ export default function FloatingNamoro({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 💍 Anel */}
       <motion.div
         className="absolute top-[15%] left-[40%] md:left-[50%]"
         style={{ y: y3 }}
@@ -44,7 +37,6 @@ export default function FloatingNamoro({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✨ Estrela 1 */}
       <motion.div
         className="absolute top-[18%] right-[30%] md:right-[35%] animate-shimmer"
         style={{ y: y1 }}
@@ -54,7 +46,6 @@ export default function FloatingNamoro({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✨ Estrela 2 */}
       <motion.div
         className="absolute bottom-[30%] right-[5%] md:right-[8%] animate-shimmer"
         style={{ animationDelay: "2.5s" }}
@@ -64,7 +55,6 @@ export default function FloatingNamoro({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🦋 Borboleta */}
       <motion.div
         className="absolute bottom-[20%] left-[10%] md:left-[15%] animate-float opacity-[0.07]"
         style={{ y: y2 }}
@@ -78,7 +68,6 @@ export default function FloatingNamoro({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ❤️ Coração 3 (tiny, bottom) */}
       <motion.div
         className="absolute bottom-[40%] left-[60%] md:left-[65%] animate-float-slow"
         style={{ animationDelay: "4s" }}

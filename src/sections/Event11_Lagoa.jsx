@@ -6,11 +6,6 @@ import FloatingLagoa from "../components/FloatingLagoa";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event11_Lagoa
- * 🚲 Pedalinho Quebrado na Lagoa
- * Tema: Água, céu, azul, aventura que deu errado mas rendeu risadas.
- */
 export default function Event11_Lagoa() {
   const sectionRef = useRef(null);
   const [isBroken, setIsBroken] = useState(false);
@@ -20,7 +15,6 @@ export default function Event11_Lagoa() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax simples
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(
     scrollYProgress,
@@ -34,7 +28,7 @@ export default function Event11_Lagoa() {
       id="event-11"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background (Lagoa) ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -47,11 +41,10 @@ export default function Event11_Lagoa() {
             opacity: 0.85,
           }}
         />
-        {/* Glows */}
+
         <div className="glow w-[500px] h-[500px] absolute rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-500/10 to-transparent top-1/4 -right-10" />
         <div className="glow w-[400px] h-[400px] absolute rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-400/10 to-transparent bottom-1/4 -left-20" />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -60,15 +53,13 @@ export default function Event11_Lagoa() {
         />
       </div>
 
-      {/* ---- Elementos SVG Flutuantes ---- */}
       <FloatingLagoa scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -88,7 +79,6 @@ export default function Event11_Lagoa() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             <TextScrub
@@ -114,10 +104,8 @@ export default function Event11_Lagoa() {
           </motion.div>
         </div>
 
-        {/* ---- Layout: Grid Bento ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
-          
-          {/* Coluna da Esquerda (Texto - 7 colunas) */}
+
           <motion.div
             className="lg:col-span-7 flex flex-col gap-6"
             initial={{ opacity: 0, x: -30 }}
@@ -126,7 +114,7 @@ export default function Event11_Lagoa() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <GlassCard className="p-8 relative overflow-hidden border-sky-500/20">
-              {/* Decorativo */}
+
               <Anchor className="absolute -right-8 -bottom-8 w-40 h-40 text-sky-500/5 rotate-12" />
 
               <div className="flex items-center gap-3 mb-6 relative z-10">
@@ -163,7 +151,6 @@ export default function Event11_Lagoa() {
               </div>
             </GlassCard>
 
-            {/* Easter Egg Card */}
             <GlassCard className="p-6 md:p-8 border-cyan-500/10 bg-black/40" variant="subtle" delay={0.4}>
               <div className="flex items-center justify-between">
                 <p className="text-white/60 italic text-sm md:text-base pr-4">
@@ -193,7 +180,6 @@ export default function Event11_Lagoa() {
             </GlassCard>
           </motion.div>
 
-          {/* Coluna da Direita (Fotos - 5 colunas) */}
           <motion.div
             className="lg:col-span-5 flex flex-col gap-4 relative"
             initial={{ opacity: 0, x: 30 }}
@@ -201,7 +187,7 @@ export default function Event11_Lagoa() {
             viewport={{ once: true, margin: "200px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Foto 1 */}
+
             <div className="relative z-10 w-full md:w-[85%] rounded-2xl overflow-hidden border-2 border-sky-500/20 shadow-2xl self-start transform -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-500 bg-sky-950/20 backdrop-blur-sm p-2">
               <img loading="lazy" decoding="async"
                 src="/photos/date-11.png"
@@ -209,8 +195,7 @@ export default function Event11_Lagoa() {
                 className="w-full h-auto object-cover rounded-xl"
               />
             </div>
-            
-            {/* Foto 2 */}
+
             <div className="relative z-20 w-[85%] md:w-[75%] -mt-10 md:-mt-20 rounded-2xl overflow-hidden border-2 border-sky-400/20 shadow-2xl self-end transform rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 bg-sky-900/30 backdrop-blur-sm p-2">
               <img loading="lazy" decoding="async"
                 src="/photos/date-11.1.png"

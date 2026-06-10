@@ -1,10 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingCachoeira
- * Elementos decorativos para a cachoeira do Horto.
- * Folhas, gotas d'água, pedras e cipó em SVG.
- */
 export default function FloatingCachoeira({ scrollProgress }) {
   const y1 = useTransform(scrollProgress, [0, 1], [0, -80]);
   const y2 = useTransform(scrollProgress, [0, 1], [0, -50]);
@@ -13,7 +8,7 @@ export default function FloatingCachoeira({ scrollProgress }) {
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      {/* 🍃 Folha 1 */}
+
       <motion.div
         className="absolute top-[8%] right-[10%] md:right-[15%]"
         style={{ y: y1, rotate: leafRotate }}
@@ -24,7 +19,6 @@ export default function FloatingCachoeira({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🍃 Folha 2 (menor, lado oposto) */}
       <motion.div
         className="absolute top-[25%] left-[5%] md:left-[8%] animate-float-slow"
         style={{ y: y2 }}
@@ -35,7 +29,6 @@ export default function FloatingCachoeira({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 💧 Gota d'água 1 */}
       <motion.div
         className="absolute top-[12%] left-[35%] md:left-[45%] animate-shimmer"
         style={{ y: y3 }}
@@ -45,7 +38,6 @@ export default function FloatingCachoeira({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 💧 Gota d'água 2 */}
       <motion.div
         className="absolute top-[30%] right-[25%] md:right-[30%] animate-shimmer"
         style={{ animationDelay: "2s" }}
@@ -55,7 +47,6 @@ export default function FloatingCachoeira({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 💧 Gota d'água 3 */}
       <motion.div
         className="absolute bottom-[20%] left-[15%] md:left-[20%] animate-shimmer"
         style={{ animationDelay: "3.5s" }}
@@ -65,7 +56,6 @@ export default function FloatingCachoeira({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🪨 Pedra decorativa */}
       <motion.div
         className="absolute bottom-[10%] right-[8%] md:right-[12%] opacity-[0.06]"
         style={{ y: y2 }}
@@ -76,7 +66,6 @@ export default function FloatingCachoeira({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🌿 Cipó (lateral direita) */}
       <motion.div
         className="absolute top-[0%] right-[3%] opacity-[0.05]"
         style={{ y: y1 }}

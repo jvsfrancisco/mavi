@@ -6,11 +6,6 @@ import FloatingCachoeira from "../components/FloatingCachoeira";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event08_Cachoeira
- * 🌿 Trilha e Cachoeira do Horto
- * Tema de natureza, aventura, verde floresta e tons de água.
- */
 export default function Event08_Cachoeira() {
   const sectionRef = useRef(null);
 
@@ -19,7 +14,6 @@ export default function Event08_Cachoeira() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax simples
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(
     scrollYProgress,
@@ -33,7 +27,7 @@ export default function Event08_Cachoeira() {
       id="event-08"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background (Natureza) ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -46,11 +40,10 @@ export default function Event08_Cachoeira() {
             opacity: 0.8,
           }}
         />
-        {/* Glows */}
+
         <div className="glow w-[500px] h-[500px] absolute rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/10 to-transparent top-1/4 -left-20" />
         <div className="glow w-[400px] h-[400px] absolute rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-teal-400/10 to-transparent bottom-1/4 -right-10" />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -59,15 +52,13 @@ export default function Event08_Cachoeira() {
         />
       </div>
 
-      {/* ---- Elementos SVG Flutuantes ---- */}
       <FloatingCachoeira scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -87,7 +78,6 @@ export default function Event08_Cachoeira() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             <TextScrub
@@ -107,10 +97,8 @@ export default function Event08_Cachoeira() {
           </motion.div>
         </div>
 
-        {/* ---- Grid da Trilha ---- */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 max-w-5xl mx-auto items-center">
-          
-          {/* Fotos (Esquerda, 5 colunas) */}
+
           <motion.div
             className="md:col-span-5 flex flex-col gap-4 relative items-center md:items-start"
             initial={{ opacity: 0, x: -30 }}
@@ -125,7 +113,7 @@ export default function Event08_Cachoeira() {
                 className="w-full h-auto object-cover"
               />
             </div>
-            
+
             <div className="relative z-0 w-[80%] md:w-[70%] -mt-10 md:-mt-16 rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl opacity-90 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500">
               <div className="absolute inset-0 bg-emerald-900/20 mix-blend-overlay z-10" />
               <img loading="lazy" decoding="async"
@@ -134,11 +122,10 @@ export default function Event08_Cachoeira() {
                 className="w-full h-auto object-cover"
               />
             </div>
-            
+
             <div className="absolute top-1/2 -left-6 w-20 h-20 rounded-full border border-dashed border-emerald-500/30 animate-spin-slow hidden md:block" />
           </motion.div>
 
-          {/* Texto e Relato (Direita, 7 colunas) */}
           <motion.div
             className="md:col-span-7 h-full flex flex-col justify-center gap-6"
             initial={{ opacity: 0, x: 30 }}
@@ -147,7 +134,7 @@ export default function Event08_Cachoeira() {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <GlassCard className="p-8 relative overflow-hidden border-emerald-500/20">
-              {/* Decorativo */}
+
               <Mountain className="absolute -right-8 -bottom-8 w-40 h-40 text-emerald-500/5 rotate-12" />
 
               <div className="flex items-center gap-3 mb-6 relative z-10">
@@ -186,7 +173,7 @@ export default function Event08_Cachoeira() {
                 <div 
                   className="glass-card-subtle px-6 py-3 border-emerald-500/30 cursor-pointer group flex items-center gap-3 relative overflow-hidden"
                   onClick={(e) => {
-                    // Ripple water effect
+
                     const btn = e.currentTarget;
                     const rect = btn.getBoundingClientRect();
                     const x = e.clientX - rect.left;

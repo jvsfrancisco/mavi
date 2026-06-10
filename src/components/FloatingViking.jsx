@@ -1,10 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingViking
- * Elementos decorativos para o restaurante Vikings.
- * Escudos, machados, runas, chifres e caneca em SVG.
- */
 export default function FloatingViking({ scrollProgress }) {
   const y1 = useTransform(scrollProgress, [0, 1], [0, -60]);
   const y2 = useTransform(scrollProgress, [0, 1], [0, -90]);
@@ -12,7 +7,7 @@ export default function FloatingViking({ scrollProgress }) {
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      {/* 🛡️ Escudo viking */}
+
       <motion.div
         className="absolute top-[8%] left-[6%] md:left-[10%]"
         style={{ y: y1, rotate: shieldRotate }}
@@ -25,7 +20,6 @@ export default function FloatingViking({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🪓 Machado */}
       <motion.div
         className="absolute top-[15%] right-[8%] md:right-[12%] animate-float-slow"
         style={{ y: y2 }}
@@ -36,7 +30,6 @@ export default function FloatingViking({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ᚱ Runa 1 */}
       <motion.div
         className="absolute top-[22%] left-[40%] md:left-[50%] animate-shimmer"
         style={{ y: y1 }}
@@ -44,7 +37,6 @@ export default function FloatingViking({ scrollProgress }) {
         <span className="text-amber-500/10 text-3xl font-bold select-none">ᚱ</span>
       </motion.div>
 
-      {/* ᛗ Runa 2 */}
       <motion.div
         className="absolute bottom-[25%] left-[5%] md:left-[8%] animate-shimmer"
         style={{ animationDelay: "2s" }}
@@ -52,7 +44,6 @@ export default function FloatingViking({ scrollProgress }) {
         <span className="text-amber-500/8 text-2xl font-bold select-none">ᛗ</span>
       </motion.div>
 
-      {/* 🍺 Caneca */}
       <motion.div
         className="absolute bottom-[15%] right-[10%] md:right-[18%] opacity-[0.06]"
         style={{ y: y2 }}
@@ -64,7 +55,6 @@ export default function FloatingViking({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🦴 Osso decorativo */}
       <motion.div
         className="absolute bottom-[40%] right-[30%] md:right-[35%] animate-float opacity-[0.04]"
         style={{ animationDelay: "3s" }}
@@ -78,7 +68,6 @@ export default function FloatingViking({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ⚔️ Espadas cruzadas (mini) */}
       <motion.div
         className="absolute top-[45%] left-[8%] md:left-[12%] opacity-[0.05]"
         style={{ y: y1 }}

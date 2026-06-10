@@ -6,11 +6,6 @@ import FloatingNamoro from "../components/FloatingNamoro";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event09_PedidoNamoro
- * 💍 O Pedido Oficial de Namoro
- * Tema romântico e familiar (tons de rose, pink, carmesim)
- */
 export default function Event09_PedidoNamoro() {
   const sectionRef = useRef(null);
   const [isBeating, setIsBeating] = useState(false);
@@ -20,7 +15,6 @@ export default function Event09_PedidoNamoro() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax simples
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(
     scrollYProgress,
@@ -34,7 +28,7 @@ export default function Event09_PedidoNamoro() {
       id="event-09"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background (Romântico) ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -47,11 +41,10 @@ export default function Event09_PedidoNamoro() {
             opacity: 0.8,
           }}
         />
-        {/* Glows */}
+
         <div className="glow w-[600px] h-[600px] absolute rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-rose-500/15 to-transparent top-1/4 -right-20" />
         <div className="glow w-[400px] h-[400px] absolute rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-pink-500/10 to-transparent bottom-1/4 -left-10" />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -60,15 +53,13 @@ export default function Event09_PedidoNamoro() {
         />
       </div>
 
-      {/* ---- Elementos SVG Flutuantes ---- */}
       <FloatingNamoro scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -88,7 +79,6 @@ export default function Event09_PedidoNamoro() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             <TextScrub
@@ -108,10 +98,8 @@ export default function Event09_PedidoNamoro() {
           </motion.div>
         </div>
 
-        {/* ---- Layout: Grid Bento Adaptado ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
-          
-          {/* Coluna da Esquerda (Texto e Easter Egg - 7 colunas) */}
+
           <motion.div
             className="lg:col-span-7 flex flex-col gap-6"
             initial={{ opacity: 0, x: -30 }}
@@ -179,7 +167,6 @@ export default function Event09_PedidoNamoro() {
 
           </motion.div>
 
-          {/* Coluna da Direita (Fotos - 5 colunas) */}
           <motion.div
             className="lg:col-span-5 flex flex-col gap-4 relative"
             initial={{ opacity: 0, x: 30 }}
@@ -187,7 +174,7 @@ export default function Event09_PedidoNamoro() {
             viewport={{ once: true, margin: "200px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Foto 1: Algodão Doce */}
+
             <div className="relative z-10 w-full md:w-[85%] rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl self-start transform -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-500 bg-white/5 backdrop-blur-sm p-2">
               <img loading="lazy" decoding="async"
                 src="/photos/date-9.1.png"
@@ -198,8 +185,7 @@ export default function Event09_PedidoNamoro() {
                 Aquele sorriso...
               </p>
             </div>
-            
-            {/* Foto 2: Espelho */}
+
             <div className="relative z-20 w-[85%] md:w-[75%] -mt-10 md:-mt-20 rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl self-end transform rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 bg-white/5 backdrop-blur-sm p-2">
               <img loading="lazy" decoding="async"
                 src="/photos/date-9.png"
@@ -208,7 +194,6 @@ export default function Event09_PedidoNamoro() {
               />
             </div>
 
-            {/* Sparkles Decorativos */}
             <motion.div 
               className="absolute -top-4 right-4 text-2xl"
               animate={{ opacity: [0.5, 1, 0.5], scale: [0.8, 1.2, 0.8] }}

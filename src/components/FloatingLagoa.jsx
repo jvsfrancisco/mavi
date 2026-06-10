@@ -1,10 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingLagoa
- * Elementos decorativos para a Lagoa Rodrigo de Freitas.
- * Ondas, rodas de bicicleta, engrenagens quebradas e pedalinhos em SVG.
- */
 export default function FloatingLagoa({ scrollProgress }) {
   const y1 = useTransform(scrollProgress, [0, 1], [0, -80]);
   const y2 = useTransform(scrollProgress, [0, 1], [0, -40]);
@@ -13,7 +8,7 @@ export default function FloatingLagoa({ scrollProgress }) {
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      {/* 🌊 Onda 1 */}
+
       <motion.div
         className="absolute top-[10%] left-[8%] md:left-[15%]"
         style={{ y: y1 }}
@@ -23,7 +18,6 @@ export default function FloatingLagoa({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🌊 Onda 2 */}
       <motion.div
         className="absolute bottom-[20%] right-[10%] md:right-[20%] animate-float-slow"
         style={{ y: y2 }}
@@ -33,7 +27,6 @@ export default function FloatingLagoa({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🚲 Roda de bicicleta */}
       <motion.div
         className="absolute top-[25%] right-[5%] md:right-[10%]"
         style={{ y: y3, rotate: wheelRotate }}
@@ -48,7 +41,6 @@ export default function FloatingLagoa({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 🦢 Pedalinho (Cisne simplificado) */}
       <motion.div
         className="absolute bottom-[35%] left-[5%] md:left-[12%] animate-float"
         style={{ y: y1 }}
@@ -58,7 +50,6 @@ export default function FloatingLagoa({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ⚙️ Engrenagem Quebrada (Pedal quebrado) */}
       <motion.div
         className="absolute top-[45%] right-[30%] md:right-[35%] animate-shimmer"
         style={{ animationDelay: "2s" }}
@@ -69,7 +60,6 @@ export default function FloatingLagoa({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 💧 Gotas d'água */}
       <motion.div
         className="absolute top-[20%] left-[45%] md:left-[55%] animate-float-slow"
         style={{ animationDelay: "1s" }}

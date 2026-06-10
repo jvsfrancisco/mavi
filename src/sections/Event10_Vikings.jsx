@@ -6,11 +6,6 @@ import FloatingViking from "../components/FloatingViking";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event10_Vikings
- * 🛡️ Flores e Valhalla
- * Tema rústico: bronze, madeira, âmbar e ferro escuro.
- */
 export default function Event10_Vikings() {
   const sectionRef = useRef(null);
   const runes = ["ᚲ", "ᚱ", "ᚺ", "ᛗ", "ᛃ", "ᛊ", "ᚦ"];
@@ -22,7 +17,6 @@ export default function Event10_Vikings() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax simples
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(
     scrollYProgress,
@@ -36,7 +30,7 @@ export default function Event10_Vikings() {
       id="event-10"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background (Viking / Rust) ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -49,16 +43,14 @@ export default function Event10_Vikings() {
             opacity: 0.85,
           }}
         />
-        {/* Glows */}
+
         <div className="glow w-[500px] h-[500px] absolute rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-600/10 to-transparent top-1/4 -right-10" />
         <div className="glow w-[600px] h-[600px] bg-orange-700/10 bottom-1/4 -left-20 absolute rounded-full mix-blend-screen filter blur-[120px]" />
-        
-        {/* Textura de ruído rústico (opcional) */}
+
         <div 
           className="absolute inset-0 opacity-[0.15] mix-blend-overlay pointer-events-none"
         />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -67,15 +59,13 @@ export default function Event10_Vikings() {
         />
       </div>
 
-      {/* ---- Elementos SVG Flutuantes ---- */}
       <FloatingViking scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -95,7 +85,6 @@ export default function Event10_Vikings() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight flex flex-col md:flex-row items-center justify-center gap-3">
             <TextScrub
@@ -119,10 +108,8 @@ export default function Event10_Vikings() {
           </motion.div>
         </div>
 
-        {/* ---- Grid (Bento) ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-5xl mx-auto">
-          
-          {/* Lado Esquerdo: Texto (7 colunas) */}
+
           <motion.div
             className="lg:col-span-7 flex flex-col gap-6"
             initial={{ opacity: 0, x: -30 }}
@@ -130,9 +117,9 @@ export default function Event10_Vikings() {
             viewport={{ once: true, margin: "200px" }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Card Principal */}
+
             <GlassCard className="p-8 relative overflow-hidden border-amber-600/20 flex-1">
-              {/* Decorativo */}
+
               <Flower className="absolute -right-8 -bottom-8 w-40 h-40 text-amber-500/5 rotate-45" />
 
               <div className="flex items-center gap-3 mb-6 relative z-10">
@@ -167,7 +154,6 @@ export default function Event10_Vikings() {
               </div>
             </GlassCard>
 
-            {/* Card Secundário com Easter Egg */}
             <GlassCard className="p-6 md:p-8 border-orange-500/10 bg-black/40" variant="subtle" delay={0.4}>
               <div className="flex items-center justify-between">
                 <p className="text-white/60 italic text-sm md:text-base pr-4">
@@ -191,7 +177,6 @@ export default function Event10_Vikings() {
             </GlassCard>
           </motion.div>
 
-          {/* Lado Direito: Foto (5 colunas) */}
           <motion.div
             className="lg:col-span-5 h-full relative group"
             initial={{ opacity: 0, x: 30 }}
@@ -206,7 +191,7 @@ export default function Event10_Vikings() {
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-60" />
-              
+
               <div className="absolute bottom-6 left-6 right-6">
                 <p className="text-amber-300 font-display italic text-lg drop-shadow-md">
                   A Rainha de Valhalla 🛡️
@@ -214,8 +199,7 @@ export default function Event10_Vikings() {
                 <div className="h-px w-1/3 bg-gradient-to-r from-amber-500/50 to-transparent mt-2" />
               </div>
             </div>
-            
-            {/* Runas decorativas flutuantes */}
+
             <motion.div 
               className="absolute -top-4 -right-4 w-12 h-12 rounded-full border border-amber-500/30 bg-black/60 backdrop-blur-md flex items-center justify-center text-amber-500 text-sm font-bold shadow-lg cursor-pointer"
               animate={{ rotate: 360 }}

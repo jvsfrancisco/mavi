@@ -6,11 +6,6 @@ import GlassCard from "../components/GlassCard";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event07_Maracana
- * ⚽ Botafogo x Flamengo no Maracanã
- * Tema de rivalidade (Preto/Branco vs Vermelho/Preto), mas com muito amor.
- */
 export default function Event07_Maracana() {
   const sectionRef = useRef(null);
 
@@ -19,7 +14,6 @@ export default function Event07_Maracana() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax simples
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(
     scrollYProgress,
@@ -33,7 +27,7 @@ export default function Event07_Maracana() {
       id="event-07"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background (Rivalidade) ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -45,11 +39,10 @@ export default function Event07_Maracana() {
             opacity: 0.8,
           }}
         />
-        {/* Glows */}
+
         <div className="glow w-[400px] h-[400px] bg-white/5 top-1/4 -left-10 absolute" />
         <div className="glow w-[500px] h-[500px] bg-red-600/10 bottom-1/4 -right-20 absolute" />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -58,12 +51,11 @@ export default function Event07_Maracana() {
         />
       </div>
 
-      {/* ---- Conteúdo ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -83,7 +75,6 @@ export default function Event07_Maracana() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight flex flex-col md:flex-row items-center justify-center gap-3">
             <TextScrub
@@ -110,9 +101,8 @@ export default function Event07_Maracana() {
           </motion.div>
         </div>
 
-        {/* ---- Bento Grid Rivalidade ---- */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 max-w-5xl mx-auto">
-          {/* Card Principal de Texto (Esquerda, 6 colunas) */}
+
           <motion.div
             className="md:col-span-6 h-full"
             initial={{ opacity: 0, x: -30 }}
@@ -170,10 +160,8 @@ export default function Event07_Maracana() {
             </GlassCard>
           </motion.div>
 
-          {/* Coluna da Direita (6 colunas combinando Vídeo e Fotos) */}
           <div className="md:col-span-6 flex flex-col gap-6 h-full">
-            
-            {/* Vídeo do Date */}
+
             <motion.div 
               className="w-full shrink-0"
               initial={{ opacity: 0, y: 30 }}
@@ -190,10 +178,10 @@ export default function Event07_Maracana() {
                     allowFullScreen
                     className="absolute inset-0 w-full h-full border-0"
                   ></iframe>
-                  {/* Overlay sutil para esconder título do YouTube */}
+
                   <div className="absolute top-0 inset-x-0 h-[100px] bg-gradient-to-b from-black/95 to-transparent pointer-events-none z-10" />
                 </div>
-                {/* Legenda do vídeo */}
+
                 <div className="mt-3 px-2 pb-1 shrink-0">
                   <p className="text-xs text-white/30 font-medium tracking-wide text-center">
                     ⚽ Clima de jogo
@@ -202,7 +190,6 @@ export default function Event07_Maracana() {
               </GlassCard>
             </motion.div>
 
-            {/* Fotos com a camisa - EMPILHADAS HORIZONTALMENTE */}
             <motion.div
               className="flex flex-col gap-4 flex-1"
               initial={{ opacity: 0, x: 30 }}
@@ -221,7 +208,7 @@ export default function Event07_Maracana() {
                   Rivais...
                 </p>
               </div>
-              
+
               <div className="group relative w-full h-[180px] md:h-[220px] rounded-2xl overflow-hidden border border-white/10 shrink-0">
                 <img loading="lazy" decoding="async"
                   src="/photos/date-6.png"

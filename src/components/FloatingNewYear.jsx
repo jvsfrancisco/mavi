@@ -1,10 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingNewYear
- * Elementos decorativos flutuantes temáticos de Ano Novo:
- * Estrelinhas, brilhos dourados e prateados.
- */
 export default function FloatingNewYear({ scrollProgress }) {
   const y1 = useTransform(scrollProgress, [0, 1], [0, -80]);
   const y2 = useTransform(scrollProgress, [0, 1], [0, -120]);
@@ -14,7 +9,7 @@ export default function FloatingNewYear({ scrollProgress }) {
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      {/* ✨ Estrela Guia Dourada */}
+
       <motion.div
         className="absolute top-[10%] right-[20%] animate-pulse"
         style={{ y: y1, rotate: rotate1 }}
@@ -24,7 +19,6 @@ export default function FloatingNewYear({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✨ Estrela Prateada */}
       <motion.div
         className="absolute bottom-[30%] left-[10%] animate-shimmer"
         style={{ y: y2, rotate: rotate2 }}
@@ -34,7 +28,6 @@ export default function FloatingNewYear({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✨ Brilho Pequeno 1 */}
       <motion.div
         className="absolute top-[30%] left-[15%] animate-shimmer"
         style={{ y: y3, animationDelay: "1s" }}
@@ -44,7 +37,6 @@ export default function FloatingNewYear({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ✨ Brilho Pequeno 2 */}
       <motion.div
         className="absolute bottom-[15%] right-[15%] animate-shimmer"
         style={{ y: y1, animationDelay: "2s" }}

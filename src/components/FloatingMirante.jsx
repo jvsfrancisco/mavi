@@ -1,17 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingMirante
- * Elementos SVG flutuantes temáticos do Mirante Dona Marta:
- * - Silhueta do Cristo Redentor
- * - Nuvens em parallax
- * - Pássaros voando
- * - Montanhas ao fundo
- * - Estrelinhas / brilhos
- *
- * @param {object} props
- * @param {import("framer-motion").MotionValue} props.scrollProgress
- */
 export default function FloatingMirante({ scrollProgress }) {
   const y1 = useTransform(scrollProgress, [0, 1], [0, -130]);
   const y2 = useTransform(scrollProgress, [0, 1], [0, -80]);
@@ -23,30 +11,28 @@ export default function FloatingMirante({ scrollProgress }) {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-      {/* ---- Cristo Redentor (silhueta — centro-direita) ---- */}
       <motion.div
         className="absolute top-[8%] right-[12%] animate-float-slow"
         style={{ y: y1 }}
       >
         <svg width="80" height="120" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-[0.12] drop-shadow-lg">
-          {/* Cabeça */}
+
           <circle cx="40" cy="14" r="8" fill="white" />
-          {/* Corpo */}
+
           <rect x="36" y="22" width="8" height="45" rx="3" fill="white" />
-          {/* Braços abertos */}
+
           <rect x="4" y="26" width="72" height="7" rx="3.5" fill="white" />
-          {/* Mãos */}
+
           <circle cx="6" cy="29.5" r="4" fill="white" />
           <circle cx="74" cy="29.5" r="4" fill="white" />
-          {/* Base / pedestal */}
+
           <path d="M28 67L25 95H55L52 67" fill="white" opacity="0.7" />
           <rect x="20" y="95" width="40" height="8" rx="2" fill="white" opacity="0.5" />
-          {/* Montanha base */}
+
           <path d="M5 115L40 85L75 115H5Z" fill="white" opacity="0.15" />
         </svg>
       </motion.div>
 
-      {/* ---- Nuvem grande (top-left) ---- */}
       <motion.div
         className="absolute top-[15%] left-[5%]"
         style={{ y: y2, x: x1 }}
@@ -59,7 +45,6 @@ export default function FloatingMirante({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ---- Nuvem média (center-right) ---- */}
       <motion.div
         className="absolute top-[40%] right-[3%]"
         style={{ y: y3, x: x2 }}
@@ -71,7 +56,6 @@ export default function FloatingMirante({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ---- Nuvem pequena (bottom-left) ---- */}
       <motion.div
         className="absolute bottom-[25%] left-[15%]"
         style={{ y: y1, x: x3 }}
@@ -83,7 +67,6 @@ export default function FloatingMirante({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ---- Pássaros voando (grupo 1 — top) ---- */}
       <motion.div
         className="absolute top-[22%] left-[35%]"
         style={{ y: y2, x: x3 }}
@@ -96,7 +79,6 @@ export default function FloatingMirante({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ---- Pássaros voando (grupo 2 — bottom) ---- */}
       <motion.div
         className="absolute bottom-[35%] right-[25%]"
         style={{ y: y3, x: x2 }}
@@ -108,7 +90,6 @@ export default function FloatingMirante({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ---- Silhueta de montanhas (fundo — bottom) ---- */}
       <motion.div
         className="absolute bottom-0 left-0 w-full opacity-[0.06]"
         style={{ y: y2 }}
@@ -127,7 +108,6 @@ export default function FloatingMirante({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ---- Brilhos (simula ar limpo de altitude) ---- */}
       {[...Array(10)].map((_, i) => (
         <motion.div
           key={i}

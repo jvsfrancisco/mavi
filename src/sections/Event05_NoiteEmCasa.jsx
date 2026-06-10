@@ -6,16 +6,6 @@ import FloatingNoite from "../components/FloatingNoite";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event05_NoiteEmCasa
- * 🌙 Longe dos perigos noturnos — noite aconchegante em casa
- *
- * Layout diferenciado: Polaroids espalhadas na cama
- * As 3 fotos ficam empilhadas com rotações diferentes.
- * Ao clicar em uma, ela "sobe" pra frente com animação suave.
- */
-
-/** Fotos espalhadas como polaroids */
 const POLAROIDS = [
   {
     src: "/photos/date-5.png",
@@ -42,14 +32,13 @@ const POLAROIDS = [
 
 export default function Event05_NoiteEmCasa() {
   const sectionRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(null); // foto do meio na frente
+  const [activeIndex, setActiveIndex] = useState(null); 
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // Parallax
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(
     scrollYProgress,
@@ -62,7 +51,6 @@ export default function Event05_NoiteEmCasa() {
     [0.85, 1, 1, 0.95]
   );
 
-  /** Traz a foto clicada pra frente */
   const bringToFront = (index) => {
     setActiveIndex(index);
   };
@@ -73,7 +61,7 @@ export default function Event05_NoiteEmCasa() {
       id="event-05"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background (noite escura, aconchegante) ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -88,12 +76,11 @@ export default function Event05_NoiteEmCasa() {
             opacity: 0.7,
           }}
         />
-        {/* Glows suaves e quentes */}
+
         <div className="glow w-[500px] h-[500px] bg-purple-600/15 top-1/3 -left-20 absolute" />
         <div className="glow w-[400px] h-[400px] bg-indigo-500/10 bottom-1/4 right-10 absolute" />
         <div className="glow w-[300px] h-[300px] bg-pink-500/10 top-1/4 right-1/3 absolute" />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -102,15 +89,13 @@ export default function Event05_NoiteEmCasa() {
         />
       </div>
 
-      {/* ---- Elementos flutuantes (estrelas, lua, zzz) ---- */}
       <FloatingNoite scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-10"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -130,7 +115,6 @@ export default function Event05_NoiteEmCasa() {
           </div>
         </motion.div>
 
-        {/* ---- Título com Text Scrubbing ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             <TextScrub
@@ -150,7 +134,6 @@ export default function Event05_NoiteEmCasa() {
           </motion.div>
         </div>
 
-        {/* ---- Polaroids espalhadas (tela cheia, em cima do texto) ---- */}
         <motion.div
           className="relative h-[420px] md:h-[500px] mb-10"
           style={{ scale: photosScale }}
@@ -206,7 +189,7 @@ export default function Event05_NoiteEmCasa() {
                     setActiveIndex(isActive ? null : index);
                   }}
                 >
-                  {/* Polaroid frame */}
+
                   <div className="bg-white/[0.04] backdrop-blur-sm border border-white/10 rounded-xl p-2 pb-7 shadow-2xl shadow-black/50">
                     <div className="w-[200px] h-[260px] md:w-[230px] md:h-[300px] rounded-lg overflow-hidden">
                       <img loading="lazy" decoding="async"
@@ -226,7 +209,6 @@ export default function Event05_NoiteEmCasa() {
           </div>
         </motion.div>
 
-        {/* ---- Texto (abaixo das polaroids, largura total) ---- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           <GlassCard className="p-6 md:p-8" delay={0.3}>
             <div className="flex items-center gap-3 mb-4">
@@ -264,7 +246,7 @@ export default function Event05_NoiteEmCasa() {
                   animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   onClick={() => {
-                    // Dim lights - escurece a seção por 2s
+
                     const section = document.getElementById('event-05');
                     if (!section) return;
                     const overlay = document.createElement('div');
@@ -283,7 +265,6 @@ export default function Event05_NoiteEmCasa() {
               </div>
             </GlassCard>
 
-            {/* Mini-card + Magnetic */}
             <MagneticElement strength={20}>
               <motion.div
                 className="flex items-center gap-4 glass-card-subtle px-5 py-3"

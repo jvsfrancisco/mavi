@@ -7,13 +7,9 @@ import MagneticElement from "../components/MagneticElement";
 import FloatingNewYear from "../components/FloatingNewYear";
 import confetti from "canvas-confetti";
 
-/**
- * Event15_AnoNovo
- * 🎆 Nosso primeiro Ano Novo (Praia da Tartaruga)
- */
 export default function Event15_AnoNovo() {
   const sectionRef = useRef(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -60,7 +56,7 @@ export default function Event15_AnoNovo() {
       }
 
       const particleCount = 50 * (timeLeft / duration);
-      // Foguetes prateados e dourados
+
       confetti({
         ...defaults, particleCount,
         origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
@@ -80,7 +76,7 @@ export default function Event15_AnoNovo() {
       id="event-15"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -89,12 +85,11 @@ export default function Event15_AnoNovo() {
             opacity: 0.9,
           }}
         />
-        {/* Glows: Dourado, Prata e um leve Ciano da Praia */}
+
         <div className="glow w-[600px] h-[600px] bg-amber-500/10 top-1/4 -right-20 absolute" />
         <div className="glow w-[500px] h-[500px] bg-slate-400/10 bottom-0 left-0 absolute" />
         <div className="glow w-[400px] h-[400px] bg-cyan-600/5 top-1/3 left-1/4 absolute" />
-        
-        {/* Partículas brilhantes */}
+
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
 
@@ -104,7 +99,7 @@ export default function Event15_AnoNovo() {
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: y1, opacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-10"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -124,7 +119,6 @@ export default function Event15_AnoNovo() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
         <div className="text-center mb-16 md:mb-24">
           <h2 className="font-display text-4xl sm:text-5xl md:text-7xl font-black leading-tight tracking-tight">
             <TextScrub
@@ -149,10 +143,8 @@ export default function Event15_AnoNovo() {
           </motion.div>
         </div>
 
-        {/* ---- Bento Grid Adaptado ---- */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 max-w-6xl mx-auto">
-          
-          {/* Card Principal de Texto (Esquerda, 5 colunas) */}
+
           <motion.div
             className="md:col-span-5 h-full"
             initial={{ opacity: 0, x: -30 }}
@@ -190,7 +182,7 @@ export default function Event15_AnoNovo() {
                 </p>
                 <div className="pt-4 flex items-center gap-2">
                   <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent" />
-                  {/* EASTER EGG DE FOGOS */}
+
                   <span 
                     className="text-amber-400/60 text-xs select-none flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/5 cursor-pointer hover:bg-white/10 hover:text-amber-300 transition-colors"
                     onClick={triggerFireworks}
@@ -204,11 +196,9 @@ export default function Event15_AnoNovo() {
             </GlassCard>
           </motion.div>
 
-          {/* Coluna da Direita (Mídia, 7 colunas) */}
           <div className="md:col-span-7 flex flex-col gap-4 h-full">
             <div className="grid grid-cols-2 gap-3 md:gap-4 h-full">
-              
-              {/* Foto 1 */}
+
               <motion.div
                 className="group relative w-full aspect-[3/4] md:aspect-[4/5] rounded-2xl overflow-hidden border border-white/10"
                 initial={{ opacity: 0, y: 30 }}
@@ -224,7 +214,6 @@ export default function Event15_AnoNovo() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none z-10" />
               </motion.div>
 
-              {/* Foto 2 */}
               <motion.div
                 className="group relative w-full aspect-[3/4] md:aspect-[4/5] rounded-2xl overflow-hidden border border-white/10"
                 initial={{ opacity: 0, y: 30 }}
@@ -240,7 +229,6 @@ export default function Event15_AnoNovo() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none z-10" />
               </motion.div>
 
-              {/* Foto 3 */}
               <motion.div
                 className="group relative w-full aspect-[3/4] md:aspect-[4/5] rounded-2xl overflow-hidden border border-white/10"
                 initial={{ opacity: 0, y: 30 }}
@@ -256,7 +244,6 @@ export default function Event15_AnoNovo() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none z-10" />
               </motion.div>
 
-              {/* Foto 4 */}
               <motion.div
                 className="group relative w-full aspect-[3/4] md:aspect-[4/5] rounded-2xl overflow-hidden border border-white/10"
                 initial={{ opacity: 0, y: 30 }}
@@ -268,7 +255,7 @@ export default function Event15_AnoNovo() {
                   src="/photos/date-15.3.png"
                   alt="Ano Novo 4"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  
+
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none z-10" />
               </motion.div>

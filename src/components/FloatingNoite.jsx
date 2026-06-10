@@ -1,10 +1,5 @@
 import { motion, useTransform } from "framer-motion";
 
-/**
- * FloatingNoite
- * Elementos decorativos flutuantes para a seção noturna.
- * Estrelas, lua, Zzzs e travesseiro — tudo em SVG.
- */
 export default function FloatingNoite({ scrollProgress }) {
   const starY1 = useTransform(scrollProgress, [0, 1], [0, -60]);
   const starY2 = useTransform(scrollProgress, [0, 1], [0, -90]);
@@ -13,7 +8,7 @@ export default function FloatingNoite({ scrollProgress }) {
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-      {/* 🌙 Lua crescente */}
+
       <motion.div
         className="absolute top-[8%] right-[12%]"
         style={{ y: moonY, rotate: moonRotate }}
@@ -26,7 +21,6 @@ export default function FloatingNoite({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ⭐ Estrela 1 */}
       <motion.div
         className="absolute top-[15%] left-[18%] animate-shimmer"
         style={{ y: starY1 }}
@@ -39,7 +33,6 @@ export default function FloatingNoite({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ⭐ Estrela 2 */}
       <motion.div
         className="absolute top-[22%] right-[30%] animate-shimmer"
         style={{ y: starY2, animationDelay: "1.5s" }}
@@ -52,7 +45,6 @@ export default function FloatingNoite({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ⭐ Estrela 3 */}
       <motion.div
         className="absolute top-[10%] left-[45%] animate-shimmer"
         style={{ animationDelay: "3s" }}
@@ -65,7 +57,6 @@ export default function FloatingNoite({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ⭐ Estrela 4 */}
       <motion.div
         className="absolute bottom-[30%] left-[8%] animate-shimmer"
         style={{ animationDelay: "2s" }}
@@ -78,7 +69,6 @@ export default function FloatingNoite({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* 💤 Zzz flutuantes */}
       <motion.div
         className="absolute top-[35%] right-[8%] animate-float-slow opacity-10"
         style={{ y: starY1 }}
@@ -105,7 +95,6 @@ export default function FloatingNoite({ scrollProgress }) {
         </span>
       </motion.div>
 
-      {/* 🛏️ Travesseiro decorativo (canto inferior) */}
       <motion.div
         className="absolute bottom-[15%] right-[15%] opacity-[0.06]"
         style={{ y: starY2 }}
@@ -120,7 +109,6 @@ export default function FloatingNoite({ scrollProgress }) {
         </svg>
       </motion.div>
 
-      {/* ⭐ Estrela 5 (pequena, canto) */}
       <motion.div
         className="absolute bottom-[45%] right-[40%] animate-shimmer"
         style={{ animationDelay: "4s" }}

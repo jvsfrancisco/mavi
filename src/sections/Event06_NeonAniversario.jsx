@@ -6,11 +6,6 @@ import FloatingNeon from "../components/FloatingNeon";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event06_NeonAniversario
- * 🎉 Festa de aniversário Neon e o pedido ao pai
- * Tema Neon (cores vibrantes sob fundo escuro, glows magenta, cyan, lime).
- */
 export default function Event06_NeonAniversario() {
   const sectionRef = useRef(null);
   const [uvFlash, setUvFlash] = useState(false);
@@ -20,14 +15,13 @@ export default function Event06_NeonAniversario() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax simples
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(
     scrollYProgress,
     [0, 0.25, 0.75, 1],
     [0, 1, 1, 0]
   );
-  
+
   const photoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.95]);
   const photoRotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
 
@@ -37,7 +31,7 @@ export default function Event06_NeonAniversario() {
       id="event-06"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background (Festa Neon) ---- */}
+
       <div className="absolute inset-0 z-0 bg-black">
         <div
           className="absolute inset-0"
@@ -45,7 +39,7 @@ export default function Event06_NeonAniversario() {
             background: `radial-gradient(circle at 50% 50%, rgba(10, 0, 30, 0.9) 0%, rgba(0, 0, 0, 1) 100%)`,
           }}
         />
-        {/* Neon Glows Orgânicos */}
+
         <motion.div 
           className="glow w-[600px] h-[600px] bg-fuchsia-600/15 top-1/4 -left-32 absolute rounded-full mix-blend-screen"
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
@@ -64,8 +58,7 @@ export default function Event06_NeonAniversario() {
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 4 }}
           style={{ filter: "blur(90px)" }}
         />
-        
-        {/* Grid de Laser sutil */}
+
         <div 
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -73,8 +66,7 @@ export default function Event06_NeonAniversario() {
             backgroundSize: "40px 40px",
           }}
         />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -83,15 +75,13 @@ export default function Event06_NeonAniversario() {
         />
       </div>
 
-      {/* ---- Elementos SVG Flutuantes ---- */}
       <FloatingNeon scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -111,7 +101,6 @@ export default function Event06_NeonAniversario() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight">
             <TextScrub
@@ -137,17 +126,15 @@ export default function Event06_NeonAniversario() {
           </motion.div>
         </div>
 
-        {/* ---- Grid: Foto + Texto ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
-          
-          {/* Lado da Foto Neon (Esquerda, 5 colunas) */}
+
           <motion.div
             className="lg:col-span-5 relative"
             style={{ scale: photoScale, rotate: photoRotate }}
           >
-            {/* Efeito Glow atrás da foto */}
+
             <div className="absolute -inset-4 bg-gradient-to-br from-fuchsia-600 to-cyan-600 rounded-2xl blur-2xl opacity-20 animate-pulse" />
-            
+
             <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(217,70,239,0.15)] bg-black/40 backdrop-blur-sm p-3">
               <img loading="lazy" decoding="async"
                 src="/photos/aniversario.png"
@@ -160,8 +147,7 @@ export default function Event06_NeonAniversario() {
                 </p>
               </div>
             </div>
-            
-            {/* Decorações Neon Flutuantes */}
+
             <motion.div 
               className="absolute -top-6 -right-6 w-12 h-12 rounded-full border-2 border-lime-400/50 shadow-[0_0_15px_rgba(163,230,53,0.5)] flex items-center justify-center backdrop-blur-md"
               animate={{ y: [0, -10, 0] }}
@@ -171,7 +157,6 @@ export default function Event06_NeonAniversario() {
             </motion.div>
           </motion.div>
 
-          {/* Lado do Texto (Direita, 7 colunas) */}
           <motion.div
             className="lg:col-span-7 flex flex-col gap-6"
             initial={{ opacity: 0, x: 30 }}
@@ -180,9 +165,9 @@ export default function Event06_NeonAniversario() {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <GlassCard className="p-6 md:p-8 relative overflow-hidden bg-white/[0.02] border-white/10 backdrop-blur-xl">
-              {/* Decorative gradient line */}
+
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-fuchsia-500 via-cyan-400 to-lime-400" />
-              
+
               <div className="flex items-center gap-3 mb-6 pl-4">
                 <div className="w-10 h-10 rounded-xl bg-black/50 border border-fuchsia-500/30 shadow-[0_0_10px_rgba(217,70,239,0.2)] flex items-center justify-center">
                   <HeartHandshake className="w-5 h-5 text-fuchsia-400" />
@@ -232,7 +217,7 @@ export default function Event06_NeonAniversario() {
                 </span>
                 <div className="h-px w-16 bg-gradient-to-l from-transparent to-fuchsia-400/50" />
               </div>
-              {/* UV Flash Overlay */}
+
               <AnimatePresence>
                 {uvFlash && (
                   <motion.div
@@ -246,8 +231,7 @@ export default function Event06_NeonAniversario() {
                 )}
               </AnimatePresence>
             </GlassCard>
-            
-            {/* Magnetic Memory */}
+
             <MagneticElement strength={15}>
               <motion.div
                 className="mt-2 inline-flex self-start items-center gap-3 bg-gradient-to-r from-fuchsia-900/40 to-cyan-900/40 border border-fuchsia-500/30 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(217,70,239,0.1)]"

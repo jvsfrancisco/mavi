@@ -6,19 +6,6 @@ import FloatingMirante from "../components/FloatingMirante";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event03_Mirante
- * 🏔️ Mirante Dona Marta — Vista do Cristo e paisagem do Rio
- *
- * Features:
- * - Background com gradiente de céu azul / altitude (azul profundo, lavanda, branco nublado)
- * - Elementos SVG flutuantes (Cristo, nuvens, pássaros, montanhas)
- * - Galeria de 3 fotos com carrossel interativo dentro de glass card
- * - Scroll-telling coordenado
- * - Layout: galeria à direita, texto à esquerda
- */
-
-/** Dados das fotos do mirante */
 const PHOTOS = [
   {
     src: "/photos/date-3.png",
@@ -47,13 +34,11 @@ export default function Event03_Mirante() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
   const galleryScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.88, 1, 1, 0.95]);
   const galleryRotate = useTransform(scrollYProgress, [0, 0.5, 1], [-2, 0, 1.5]);
 
-  /** Navegação do carrossel */
   const nextPhoto = () => setCurrentPhoto((prev) => (prev + 1) % PHOTOS.length);
   const prevPhoto = () => setCurrentPhoto((prev) => (prev - 1 + PHOTOS.length) % PHOTOS.length);
 
@@ -63,7 +48,7 @@ export default function Event03_Mirante() {
       id="event-03"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background Gradient (céu de altitude / mirante) ---- */}
+
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -80,19 +65,18 @@ export default function Event03_Mirante() {
             opacity: 0.5,
           }}
         />
-        {/* Glows de céu */}
+
         <div className="glow w-[600px] h-[600px] bg-blue-500/15 top-1/4 -right-20 absolute" />
         <div className="glow w-[500px] h-[500px] bg-indigo-500/10 bottom-1/3 -left-20 absolute" />
         <div className="glow w-[400px] h-[400px] bg-sky-400/10 top-1/3 left-1/3 absolute" />
-        {/* Névoa no topo — sensação de altitude */}
+
         <div
           className="absolute top-0 left-0 right-0 h-[30%] pointer-events-none"
           style={{
             background: "linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%)",
           }}
         />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -101,15 +85,13 @@ export default function Event03_Mirante() {
         />
       </div>
 
-      {/* ---- Elementos SVG Flutuantes ---- */}
       <FloatingMirante scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo Principal ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-10"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -129,8 +111,6 @@ export default function Event03_Mirante() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
-        {/* ---- Título com Text Scrubbing ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             <TextScrub
@@ -150,18 +130,16 @@ export default function Event03_Mirante() {
           </motion.div>
         </div>
 
-        {/* ---- Grid: Galeria + Texto ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* ---- Galeria de Fotos (carrossel) ---- */}
+
           <motion.div
             className="relative"
             style={{ scale: galleryScale, rotate: galleryRotate }}
           >
             <GlassCard className="p-3 md:p-4 relative group" delay={0.3}>
-              {/* Moldura decorativa */}
+
               <div className="absolute -inset-1 bg-gradient-to-br from-sky-500/20 via-transparent to-indigo-500/20 rounded-[1.75rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
 
-              {/* Container da foto com transição */}
               <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-br from-blue-950/50 to-indigo-950/50">
                 <AnimatePresence mode="wait">
                   <motion.img
@@ -176,12 +154,10 @@ export default function Event03_Mirante() {
                   />
                 </AnimatePresence>
 
-                {/* Overlay gradiente */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 pointer-events-none" />
 
-                {/* ---- Controles do carrossel ---- */}
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  {/* Indicadores (dots) */}
+
                   <div className="flex items-center justify-center gap-2 mb-3">
                     {PHOTOS.map((_, index) => (
                       <button
@@ -197,7 +173,6 @@ export default function Event03_Mirante() {
                     ))}
                   </div>
 
-                  {/* Legenda da foto atual */}
                   <AnimatePresence mode="wait">
                     <motion.p
                       key={currentPhoto}
@@ -212,7 +187,6 @@ export default function Event03_Mirante() {
                   </AnimatePresence>
                 </div>
 
-                {/* Botões prev/next */}
                 <button
                   onClick={prevPhoto}
                   className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/50 transition-all duration-200 cursor-pointer opacity-0 group-hover:opacity-100"
@@ -229,7 +203,6 @@ export default function Event03_Mirante() {
                 </button>
               </div>
 
-              {/* Contador de fotos */}
               <div className="mt-3 px-2 pb-1 flex items-center justify-between">
                 <p className="text-xs text-white/30 font-medium tracking-wide">
                   📍 Mirante Dona Marta — 340m de altitude
@@ -242,7 +215,6 @@ export default function Event03_Mirante() {
             </GlassCard>
           </motion.div>
 
-          {/* ---- Lado do Texto ---- */}
           <div className="flex flex-col gap-6">
             <GlassCard className="p-6 md:p-8" delay={0.5}>
               <div className="flex items-center gap-3 mb-4">
@@ -288,7 +260,6 @@ export default function Event03_Mirante() {
               </div>
             </GlassCard>
 
-            {/* Mini-card + Magnetic Hover */}
             <MagneticElement strength={20}>
               <motion.div
                 className="flex items-center gap-4 glass-card-subtle px-5 py-3"

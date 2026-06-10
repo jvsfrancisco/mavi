@@ -1,10 +1,5 @@
 import { motion } from "framer-motion";
 
-/**
- * TimelineConnector
- * Linha vertical animada que conecta as seções do roadmap.
- * Flutua na borda entre as seções sem criar espaço em branco.
- */
 export default function TimelineConnector({ 
   color = "from-sunset-orange to-sunset-rose",
 }) {

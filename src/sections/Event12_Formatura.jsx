@@ -5,10 +5,6 @@ import confetti from "canvas-confetti";
 import GlassCard from "../components/GlassCard";
 import TextScrub from "../components/TextScrub";
 
-/**
- * Event12_Formatura
- * 🎓 Fotos de Formatura no Aterro do Flamengo (Monumento dos Pracinhas)
- */
 export default function Event12_Formatura() {
   const sectionRef = useRef(null);
 
@@ -50,12 +46,12 @@ export default function Event12_Formatura() {
       particleCount: 8,
       angle: 90,
       spread: 45,
-      origin: { x: 0.5, y: 1 }, // Sai bem de baixo, no centro
+      origin: { x: 0.5, y: 1 }, 
       shapes: [capelo],
-      scalar: 4, // <-- ISSO DEIXA O CAPELO GIGANTE
-      gravity: 0.2, // Cai ainda mais devagar
-      startVelocity: 65, // Sobe devagar
-      ticks: 600, // Dura bastante
+      scalar: 4, 
+      gravity: 0.2, 
+      startVelocity: 65, 
+      ticks: 600, 
     });
   };
 
@@ -65,14 +61,13 @@ export default function Event12_Formatura() {
       id="event-12"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background ---- */}
+
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-[#060608] via-neutral-900/40 to-[#060608] opacity-80" />
-        {/* Glows de celebração */}
+
         <div className="glow w-[400px] h-[400px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-500/10 to-transparent top-1/4 -right-20 absolute rounded-full" />
         <div className="glow w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/10 to-transparent bottom-1/4 -left-20 absolute rounded-full" />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -85,7 +80,7 @@ export default function Event12_Formatura() {
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY }}
       >
-        {/* ---- Badge ---- */}
+
         <motion.div
           className="flex justify-center mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -105,7 +100,6 @@ export default function Event12_Formatura() {
           </div>
         </motion.div>
 
-        {/* ---- Título ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             <TextScrub
@@ -119,7 +113,7 @@ export default function Event12_Formatura() {
               wordClassName="bg-gradient-to-r from-yellow-400 to-amber-600 bg-clip-text text-transparent drop-shadow-md"
             />
           </h2>
-          
+
           <motion.div
             className="flex items-center justify-center gap-2 mt-5 text-amber-100/50"
             initial={{ opacity: 0 }}
@@ -132,10 +126,8 @@ export default function Event12_Formatura() {
           </motion.div>
         </div>
 
-        {/* ---- Bento Grid ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
-          
-          {/* Card de Texto Principal (Esquerda, 7 colunas) */}
+
           <motion.div
             className="lg:col-span-7 flex flex-col justify-center"
             initial={{ opacity: 0, x: -30 }}
@@ -174,7 +166,7 @@ export default function Event12_Formatura() {
                   <strong className="text-emerald-400 font-medium"> o primeiro encontro oficial das nossas famílias</strong>! 
                   Um dia inesquecível em todos os sentidos.
                 </p>
-                
+
                 <div className="pt-4 flex items-center gap-2">
                   <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent" />
                   <span
@@ -190,7 +182,6 @@ export default function Event12_Formatura() {
             </GlassCard>
           </motion.div>
 
-          {/* Fotos (Direita, 5 colunas - Carrossel com botões) */}
           <motion.div
             className="lg:col-span-5 relative"
             initial={{ opacity: 0, x: 30 }}
@@ -199,10 +190,9 @@ export default function Event12_Formatura() {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <GlassCard className="p-3 md:p-4 relative group">
-              {/* Moldura decorativa */}
+
               <div className="absolute -inset-1 bg-gradient-to-br from-yellow-500/20 via-transparent to-emerald-500/20 rounded-[1.75rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
 
-              {/* Container da foto com transição */}
               <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-br from-neutral-900 to-black">
                 <AnimatePresence mode="wait">
                   <motion.img
@@ -217,10 +207,8 @@ export default function Event12_Formatura() {
                   />
                 </AnimatePresence>
 
-                {/* Overlay gradiente para os botões lerem bem */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none" />
 
-                {/* Setas Esquerda/Direita */}
                 <div className="absolute inset-y-0 left-0 flex items-center px-2">
                   <button
                     onClick={prevPhoto}
@@ -238,9 +226,8 @@ export default function Event12_Formatura() {
                   </button>
                 </div>
 
-                {/* ---- Controles do carrossel (Dots) ---- */}
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  {/* Indicadores (dots) */}
+
                   <div className="flex items-center justify-center gap-2 mb-3">
                     {PHOTOS.map((_, index) => (
                       <button
@@ -256,7 +243,6 @@ export default function Event12_Formatura() {
                     ))}
                   </div>
 
-                  {/* Legenda da foto atual */}
                   <AnimatePresence mode="wait">
                     <motion.p
                       key={currentPhoto}

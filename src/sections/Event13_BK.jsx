@@ -13,7 +13,6 @@ export default function Event13_BK() {
     offset: ["start end", "end start"],
   });
 
-  // Diferentes velocidades de parallax para cada foto espalhada
   const yPhoto1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const yPhoto2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const yPhoto3 = useTransform(scrollYProgress, [0, 1], [200, -50]);
@@ -25,7 +24,7 @@ export default function Event13_BK() {
       id="event-13"
       className="relative min-h-[120vh] flex items-center justify-center py-20 md:py-32 overflow-hidden bg-[#060608]"
     >
-      {/* Background & Glows */}
+
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-fuchsia-900/10 via-black to-black opacity-80" />
         <div className="glow w-[400px] h-[400px] bg-fuchsia-500/10 absolute top-1/4 -right-32 rounded-full blur-3xl" />
@@ -33,8 +32,7 @@ export default function Event13_BK() {
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
-        {/* TEXTO (Esquerda) - Mudado a ordem no mobile para aparecer primeiro! */}
+
         <motion.div
           className="lg:col-span-5 flex flex-col justify-center order-1 mt-12 lg:mt-0"
           style={{ y: textY }}
@@ -66,14 +64,14 @@ export default function Event13_BK() {
               wordClassName="text-white drop-shadow-md"
             />
           </h2>
-          
+
           <div className="flex items-center gap-2 mb-8 text-rose-100/50">
             <MapPin className="w-4 h-4 text-rose-400/70" />
             <span className="text-sm tracking-wide">Fundição Progresso, Lapa - RJ</span>
           </div>
 
           <GlassCard className="p-6 md:p-8 relative group overflow-hidden border-fuchsia-500/20">
-            {/* Easter Egg 1: O Disco Interativo */}
+
             <div 
               className="absolute -right-8 -bottom-8 w-48 h-48 cursor-pointer z-20"
               onClick={() => setEasterEgg(!easterEgg)}
@@ -105,7 +103,6 @@ export default function Event13_BK() {
               Foi uma noite absurda.
             </p>
 
-            {/* Easter Egg 2: Letras de música flutuantes quando o estado easterEgg for true */}
             <AnimatePresence>
               {easterEgg && (
                 <motion.div 
@@ -137,10 +134,8 @@ export default function Event13_BK() {
           </GlassCard>
         </motion.div>
 
-        {/* IMAGENS ESPALHADAS (Direita) - Mudado a ordem no mobile para baixo! */}
         <div className="lg:col-span-7 relative h-[500px] md:h-[700px] w-full order-2 mt-12 lg:mt-0">
-          
-          {/* Notas musicais flutuantes decorativas (No fundo) */}
+
           <motion.div 
             className="absolute top-[10%] right-[20%] text-rose-500/30 blur-[1px] rotate-12 z-0" 
             animate={{ y: [0, -20, 0], opacity: [0.5, 1, 0.5] }} 
@@ -156,7 +151,6 @@ export default function Event13_BK() {
             <Music className="w-8 h-8" />
           </motion.div>
 
-          {/* FOTO 1 - Central/Maior */}
           <motion.div 
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55%] sm:w-[45%] md:w-[50%] aspect-[3/4] rounded-2xl overflow-hidden border-4 border-[#0a0a0f] shadow-2xl z-20 rotate-3 cursor-pointer"
             style={{ y: yPhoto1 }}
@@ -167,7 +161,6 @@ export default function Event13_BK() {
             <div className="absolute inset-0 bg-fuchsia-500/10 mix-blend-overlay pointer-events-none" />
           </motion.div>
 
-          {/* FOTO 2 - Superior Esquerda */}
           <motion.div 
             className="absolute top-[10%] left-[5%] w-[45%] sm:w-[35%] md:w-[40%] aspect-[4/5] rounded-2xl overflow-hidden border-4 border-[#0a0a0f] shadow-xl z-10 -rotate-12 cursor-pointer"
             style={{ y: yPhoto2 }}
@@ -181,7 +174,6 @@ export default function Event13_BK() {
             </div>
           </motion.div>
 
-          {/* FOTO 3 - Inferior Direita */}
           <motion.div 
             className="absolute bottom-[5%] right-[5%] w-[50%] sm:w-[40%] md:w-[45%] aspect-[4/5] rounded-2xl overflow-hidden border-4 border-[#0a0a0f] shadow-xl z-30 rotate-12 cursor-pointer"
             style={{ y: yPhoto3 }}

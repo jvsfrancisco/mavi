@@ -6,16 +6,6 @@ import FloatingElements from "../components/FloatingElements";
 import TextScrub from "../components/TextScrub";
 import MagneticElement from "../components/MagneticElement";
 
-/**
- * Event01_PrimeiroDate
- * 🏖️ Nosso primeiro date — Praia do Arpoador + McDonald's
- *
- * Features:
- * - Background com gradiente de pôr do sol
- * - Elementos SVG flutuantes (ondas, batata frita, hambúrguer)
- * - Card com glassmorphism para foto + texto
- * - Animações de scroll-telling coordenadas
- */
 export default function Event01_PrimeiroDate() {
   const sectionRef = useRef(null);
   const [typingText, setTypingText] = useState("");
@@ -45,11 +35,9 @@ export default function Event01_PrimeiroDate() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax para o conteúdo
   const contentY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -40]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
 
-  // Parallax para a foto
   const photoScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.85, 1, 1, 0.95]);
   const photoRotate = useTransform(scrollYProgress, [0, 0.5, 1], [3, 0, -2]);
 
@@ -59,9 +47,9 @@ export default function Event01_PrimeiroDate() {
       id="event-01"
       className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* ---- Background Gradient (pôr do sol no Arpoador) ---- */}
+
       <div className="absolute inset-0 z-0">
-        {/* Gradiente principal — céu ao pôr do sol */}
+
         <div
           className="absolute inset-0"
           style={{
@@ -77,12 +65,11 @@ export default function Event01_PrimeiroDate() {
             opacity: 0.6,
           }}
         />
-        {/* Glow de sol na lateral */}
+
         <div className="glow w-[600px] h-[600px] bg-sunset-orange/30 top-1/3 -right-40 absolute" />
         <div className="glow w-[400px] h-[400px] bg-sunset-rose/20 bottom-1/4 left-10 absolute" />
         <div className="glow w-[300px] h-[300px] bg-sunset-amber/15 top-1/4 left-1/3 absolute" />
-      
-        {/* ---- Fade inferior para transição com próxima seção ---- */}
+
         <div 
           className="bottom-fade-overlay absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
           style={{
@@ -91,15 +78,13 @@ export default function Event01_PrimeiroDate() {
         />
       </div>
 
-      {/* ---- Elementos SVG Flutuantes (ondas, comida) ---- */}
       <FloatingElements scrollProgress={scrollYProgress} />
 
-      {/* ---- Conteúdo Principal ---- */}
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* ---- Badge de Data ---- */}
+
         <motion.div
           className="flex justify-center mb-10"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -119,8 +104,6 @@ export default function Event01_PrimeiroDate() {
           </div>
         </motion.div>
 
-        {/* ---- Título do Evento ---- */}
-        {/* ---- Título com Text Scrubbing ---- */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             <TextScrub
@@ -140,34 +123,29 @@ export default function Event01_PrimeiroDate() {
           </motion.div>
         </div>
 
-        {/* ---- Grid: Foto + Texto ---- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* ---- Lado da Foto ---- */}
+
           <motion.div
             className="relative"
             style={{ scale: photoScale, rotate: photoRotate }}
           >
             <GlassCard className="p-3 md:p-4 relative group" delay={0.3}>
-              {/* Moldura decorativa */}
+
               <div className="absolute -inset-1 bg-gradient-to-br from-sunset-orange/20 via-transparent to-sunset-rose/20 rounded-[1.75rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
 
-              {/* Container da foto */}
               <div className="relative rounded-2xl overflow-hidden aspect-[3/4] bg-gradient-to-br from-sunset-deep/50 to-ocean-dark/50">
-                {/*
-                  📸 FOTO DO PRIMEIRO DATE
-                  Coloque a foto em: public/photos/date-1.jpg
-                */}
+
                 <img loading="lazy" decoding="async"
                   src="/photos/date-1.jpg"
                   alt="Nosso primeiro date na Praia do Arpoador"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   onError={(e) => {
-                    // Fallback caso a foto ainda não exista
+
                     e.target.style.display = "none";
                     e.target.nextSibling.style.display = "flex";
                   }}
                 />
-                {/* Placeholder estilizado (aparece se a foto faltar) */}
+
                 <div
                   className="absolute inset-0 flex-col items-center justify-center gap-4 bg-gradient-to-br from-sunset-deep/80 to-ocean-dark/80 hidden"
                 >
@@ -178,11 +156,9 @@ export default function Event01_PrimeiroDate() {
                   </p>
                 </div>
 
-                {/* Overlay gradiente na foto */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </div>
 
-              {/* Legenda da foto */}
               <div className="mt-3 px-2 pb-1">
                 <p className="text-xs text-white/30 font-medium tracking-wide text-center">
                   📍 Arpoador — O pôr do sol mais bonito do Rio
@@ -191,7 +167,6 @@ export default function Event01_PrimeiroDate() {
             </GlassCard>
           </motion.div>
 
-          {/* ---- Lado do Texto ---- */}
           <div className="flex flex-col gap-6">
             <GlassCard className="p-6 md:p-8" delay={0.5}>
               <div className="flex items-center gap-3 mb-4">
@@ -243,7 +218,6 @@ export default function Event01_PrimeiroDate() {
               </div>
             </GlassCard>
 
-            {/* Mini-card com detalhe + Magnetic Hover */}
             <MagneticElement strength={20}>
               <motion.div
                 className="flex items-center gap-4 glass-card-subtle px-5 py-3"
