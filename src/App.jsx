@@ -15,6 +15,7 @@ import Event10_Vikings from "./sections/Event10_Vikings";
 import Event11_Lagoa from "./sections/Event11_Lagoa";
 import Event12_Formatura from "./sections/Event12_Formatura";
 import Event13_BK from "./sections/Event13_BK";
+import Event14_RioDasOstras from "./sections/Event14_RioDasOstras";
 
 /**
  * App
@@ -125,8 +126,14 @@ export default function App() {
       {/* 🎤 Evento 13 — Show do BK na Fundição */}
       <Event13_BK />
 
+      {/* ── Conector 13 → 14 ── */}
+      <TimelineConnector color="from-fuchsia-600 to-sky-500" fromColor="#060608" toColor="#060608" />
+
+      {/* 🌊 Evento 14 — Rio das Ostras */}
+      <Event14_RioDasOstras />
+
       {/* ── Conector final provisório ── */}
-      <TimelineConnector color="from-fuchsia-600 to-transparent" fromColor="#060608" toColor="#060608" />
+      <TimelineConnector color="from-sky-500 to-transparent" fromColor="#060608" toColor="#060608" />
 
       {/* 📌 Placeholder — Próximos eventos */}
       <section className="min-h-[50vh] flex items-center justify-center">
