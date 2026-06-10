@@ -4,7 +4,7 @@ import {
   Gamepad2, ChefHat, PaintBucket, Mic2, Sparkles, Anchor, Mountain, Ticket, Paintbrush, 
   Tv, Ship, Bike, Brush, Popcorn, Music, Moon, Cloud, Droplet, Star, Flame, Snowflake, 
   TreePine, Flower2, CupSoda, Martini, Headphones, Smartphone, Crown, Trophy, Gem, Coffee, 
-  Cake, Gift, ShoppingBag, Map, Key, Lock, Shield 
+  Cake, Gift, ShoppingBag, Map, Key, Lock, Shield, Sun 
 } from "lucide-react";
 
 const randomColor = () => {
@@ -56,12 +56,12 @@ export const stickers = [
   { id: "spa", title: "Dia de Spa", description: "Massagem e relaxamento total.", icon: Sparkles },
   { id: "acampar", title: "Acampar na Montanha", description: "Dormir em uma barraca.", icon: Mountain },
   { id: "montanharussa", title: "Montanha-Russa", description: "Gritar juntos no parque.", icon: Ticket },
-  { id: "balao", title: "Andar de Balão", description: "Ver o mundo lá de cima.", icon: Cloud },
+  { id: "nascerdosol", title: "Nascer do Sol", description: "Madrugar para ver o sol nascer.", icon: Sun },
   { id: "pintar", title: "Pintar um Quadro", description: "Bancar o artista plástico.", icon: Paintbrush },
   { id: "maratona", title: "Maratona de Série", description: "Final de semana no sofá.", icon: Tv },
   { id: "barco", title: "Passeio de Barco", description: "Velejar pelo mar.", icon: Ship },
   { id: "bicicleta", title: "Andar de Bicicleta", description: "Passeio no parque.", icon: Bike },
-  { id: "sushi", title: "Comer Sushi", description: "Rodízio infinito.", icon: Popcorn }, // Popcorn como comida
+  { id: "massas", title: "Rodízio de Massas", description: "Comer até não aguentar mais.", icon: Utensils },
   { id: "museu", title: "Visitar um Museu", description: "Um pouco de cultura.", icon: Brush },
   { id: "fantasia", title: "Festa a Fantasia", description: "Usar fantasia combinando.", icon: Crown },
   { id: "paraquedas", title: "Saltar de Paraquedas", description: "Aventura radical.", icon: Plane },
@@ -75,7 +75,7 @@ export const stickers = [
   { id: "escalar", title: "Escalar uma Montanha", description: "Chegar ao topo juntos.", icon: Mountain },
   { id: "estadio", title: "Jogo no Estádio", description: "Torcer no Maracanã.", icon: Trophy },
   { id: "trem", title: "Viajar de Trem", description: "Passeio nos trilhos.", icon: Map },
-  { id: "tatuagem", title: "Tatuagem de Casal", description: "Marcar na pele.", icon: Heart },
+  { id: "fondue", title: "Noite do Fondue", description: "Chocolate e frutas no inverno.", icon: Flame },
   { id: "planta", title: "Adotar uma Planta", description: "Nossa primeira filha verde.", icon: Flower2 },
   { id: "mergulho", title: "Mergulho no Mar", description: "Ver os peixinhos.", icon: Anchor },
   { id: "danca", title: "Aprender uma Dança", description: "Fazer aula de salão.", icon: Music },

@@ -163,6 +163,9 @@ export default function Album() {
           maxShadowOpacity={0.3}
           showCover={false}
           mobileScrollSupport={true}
+          swipeDistance={10}
+          clickEventForward={true}
+          disableFlipByClick={true}
           className="shadow-[0_30px_60px_rgba(0,0,0,0.8)]"
           ref={bookRef}
         >
@@ -221,25 +224,24 @@ export default function Album() {
                           <motion.div
                             initial={{ scale: 1.5, opacity: 0, rotate: finalRotation }}
                             animate={{ scale: 1, opacity: 1, rotate: finalRotation }}
-                            className={`absolute inset-0 bg-white rounded-lg p-1.5 pb-8 shadow-[0_5px_15px_rgba(0,0,0,0.4)] flex flex-col z-20 group`}
+                            className={`absolute inset-0 bg-white rounded-[4px] p-1 shadow-[0_5px_15px_rgba(0,0,0,0.4)] flex flex-col z-20 group`}
                           >
                             {/* Arte Frontal */}
                             <div className={`flex-1 rounded-sm flex items-center justify-center bg-gradient-to-br ${sticker.color} relative overflow-hidden`}>
                               <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 -rotate-45 translate-x-[-100%] transition-transform duration-700 group-hover:translate-x-[100%]" />
-                              <Icon className="w-10 h-10 md:w-14 md:h-14 text-white drop-shadow-md" />
+                              <Icon className="w-8 h-8 md:w-12 md:h-12 text-white drop-shadow-md" />
                             </div>
                             
                             {/* Titulo na parte branca */}
-                            <div className="absolute bottom-1 left-0 right-0 text-center px-1 flex flex-col justify-end">
-                              <h3 className="font-sans text-[8px] md:text-[10px] font-extrabold text-neutral-800 uppercase tracking-tight leading-tight line-clamp-1">
+                            <div className="pt-1 pb-0.5 text-center px-0.5 flex flex-col items-center justify-center min-h-[32px] md:min-h-[40px] shrink-0">
+                              <h3 className="font-sans text-[7px] md:text-[9px] font-extrabold text-neutral-800 uppercase tracking-tight leading-tight line-clamp-1">
                                 {sticker.title}
                               </h3>
-                              <span className="font-sans text-[6px] md:text-[7px] text-neutral-600 leading-tight line-clamp-1 block mb-[1px]">
+                              <span className="font-sans text-[5px] md:text-[6.5px] text-neutral-600 leading-tight line-clamp-1 block mb-[1px]">
                                 {sticker.description}
                               </span>
-                              {/* Se tiver data, aparece pequenininho */}
                               {typeof memory === 'object' && memory.date && (
-                                <span className="font-sans text-[5px] md:text-[6px] text-neutral-400 font-bold block">
+                                <span className="font-sans text-[4.5px] md:text-[5.5px] text-neutral-400 font-bold block">
                                   {memory.date}
                                 </span>
                               )}
@@ -248,9 +250,16 @@ export default function Album() {
                             {/* O Post-it / Polaroid Thumbnail */}
                             {typeof memory === 'object' && (memory.note || memory.photoUrl) && (
                               <button 
-                                onPointerDown={(e) => e.stopPropagation()}
-                                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setViewingMemory({ sticker, memory }); }}
-                                className="absolute -bottom-2 -right-2 w-12 h-12 rotate-6 shadow-md flex items-center justify-center hover:scale-110 transition-transform z-30 cursor-pointer overflow-hidden bg-white p-1"
+                                onPointerDownCapture={(e) => { e.stopPropagation(); e.nativeEvent.stopImmediatePropagation(); }}
+                                onMouseDownCapture={(e) => { e.stopPropagation(); e.nativeEvent.stopImmediatePropagation(); }}
+                                onTouchStartCapture={(e) => { e.stopPropagation(); e.nativeEvent.stopImmediatePropagation(); }}
+                                onClickCapture={(e) => { 
+                                  e.preventDefault(); 
+                                  e.stopPropagation(); 
+                                  e.nativeEvent.stopImmediatePropagation();
+                                  setViewingMemory({ sticker, memory }); 
+                                }}
+                                className="absolute -top-2 -right-2 w-10 h-10 md:w-12 md:h-12 rotate-12 shadow-md flex items-center justify-center hover:scale-110 transition-transform z-30 cursor-pointer overflow-hidden bg-white p-1 rounded-sm"
                                 style={{ boxShadow: "2px 4px 8px rgba(0,0,0,0.4)" }}
                                 title="Abrir recordação"
                               >
@@ -420,28 +429,28 @@ export default function Album() {
               </button>
 
               {/* Título da Memória */}
-              <h2 className="font-display text-2xl font-bold text-white mb-1">
+              <h2 className="font-display text-2xl font-bold text-white mb-1 text-center">
                 {viewingMemory.sticker.title}
               </h2>
-              <span className="text-xs font-semibold tracking-widest text-sunset-rose uppercase mb-8">
+              <span className="text-xs font-semibold tracking-widest text-sunset-rose uppercase mb-6 text-center">
                 {viewingMemory.memory.date || "Data não registrada"}
               </span>
 
               {/* A Polaroid Fotográfica */}
-              <div className="bg-white p-3 md:p-4 pb-12 md:pb-16 rounded-sm shadow-2xl rotate-2 relative w-full max-w-[260px] mx-auto z-10">
+              <div className="bg-white p-3 md:p-4 rounded-sm shadow-2xl rotate-2 w-full max-w-[260px] mx-auto z-10 flex flex-col">
                 {viewingMemory.memory.photoUrl ? (
-                  <div className="w-full aspect-square bg-neutral-200 overflow-hidden mb-2 rounded-sm border border-neutral-200">
+                  <div className="w-full aspect-square bg-neutral-200 overflow-hidden mb-3 rounded-sm border border-neutral-200 shrink-0">
                     <img src={viewingMemory.memory.photoUrl} alt="Recordação" className="w-full h-full object-cover" />
                   </div>
                 ) : (
-                  <div className="w-full aspect-square bg-yellow-100 flex items-center justify-center mb-2 border border-yellow-200">
+                  <div className="w-full aspect-square bg-yellow-100 flex items-center justify-center mb-3 border border-yellow-200 shrink-0">
                     <StickyNote className="w-12 h-12 text-yellow-300 opacity-50" />
                   </div>
                 )}
 
                 {/* Texto da Polaroid */}
-                <div className="absolute bottom-4 left-0 right-0 px-4 text-center">
-                  <p className="font-handwriting text-lg md:text-xl text-neutral-800 leading-tight line-clamp-3">
+                <div className="px-2 text-center pb-2">
+                  <p className="font-handwriting text-lg md:text-xl text-neutral-800 leading-snug">
                     {viewingMemory.memory.note || "Nenhuma anotação registrada..."}
                   </p>
                 </div>
