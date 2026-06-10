@@ -17,6 +17,7 @@ import Event12_Formatura from "./sections/Event12_Formatura";
 import Event13_BK from "./sections/Event13_BK";
 import Event14_RioDasOstras from "./sections/Event14_RioDasOstras";
 import Event15_AnoNovo from "./sections/Event15_AnoNovo";
+import Event16_Petropolis from "./sections/Event16_Petropolis";
 
 /**
  * App
@@ -139,8 +140,14 @@ export default function App() {
       {/* 🎆 Evento 15 — Ano Novo */}
       <Event15_AnoNovo />
 
+      {/* ── Conector 15 → 16 ── */}
+      <TimelineConnector color="from-amber-400 to-rose-500" fromColor="#060608" toColor="#060608" />
+
+      {/* 🍓 Evento 16 — Petrópolis */}
+      <Event16_Petropolis />
+
       {/* ── Conector final provisório ── */}
-      <TimelineConnector color="from-amber-400 to-transparent" fromColor="#060608" toColor="#060608" />
+      <TimelineConnector color="from-rose-500 to-transparent" fromColor="#060608" toColor="#060608" />
 
       {/* 📌 Placeholder — Próximos eventos */}
       <section className="min-h-[50vh] flex items-center justify-center">
