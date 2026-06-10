@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, Sparkles, Check, Lock, ChevronLeft, ChevronRight, Image as ImageIcon, Calendar, FileText, StickyNote, X } from "lucide-react";
 import { stickers } from "../data/stickers.jsx";
 import { db } from "../lib/firebase";
+import FloatingAlbumElements from "../components/FloatingAlbumElements.jsx";
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 
 const STICKERS_PER_PAGE = 4;
@@ -129,8 +130,8 @@ export default function Album() {
   };
 
   return (
-    <div className="min-h-screen bg-[#060608] pb-32 pt-20 px-2 md:px-6 relative overflow-hidden flex flex-col items-center">
-      <div className="glow w-[800px] h-[800px] bg-sunset-rose/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute pointer-events-none" />
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0e] via-[#060608] to-[#120508] pb-32 pt-20 px-2 md:px-6 relative overflow-hidden flex flex-col items-center">
+      <FloatingAlbumElements />
 
       {/* Header */}
       <div className="text-center mb-8 relative z-10">
@@ -165,9 +166,6 @@ export default function Album() {
           maxShadowOpacity={0.3}
           showCover={false}
           mobileScrollSupport={true}
-          swipeDistance={10}
-          clickEventForward={true}
-          disableFlipByClick={true}
           className="shadow-[0_30px_60px_rgba(0,0,0,0.8)]"
           ref={bookRef}
         >
