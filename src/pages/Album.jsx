@@ -59,10 +59,10 @@ export default function Album() {
   const bookRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
   
-  // Form states
   const [memoryDate, setMemoryDate] = useState("");
   const [memoryNote, setMemoryNote] = useState("");
   const [memoryFile, setMemoryFile] = useState(null);
+  const [memoryAuthor, setMemoryAuthor] = useState("both");
   const [isUploading, setIsUploading] = useState(false);
 
   // Agora usamos uma coleção no Firestore (cada figurinha = 1 documento) para evitar limite de 1MB
@@ -99,7 +99,8 @@ export default function Album() {
         id: selectedSticker.id,
         date: formattedDate,
         note: memoryNote,
-        photoUrl: photoUrl
+        photoUrl: photoUrl,
+        author: memoryAuthor
       };
 
       // Salva no Firestore como um documento individual
@@ -110,6 +111,7 @@ export default function Album() {
       setMemoryDate("");
       setMemoryNote("");
       setMemoryFile(null);
+      setMemoryAuthor("both");
     } catch (error) {
       console.error("Erro ao salvar memória:", error);
       alert("Houve um erro ao colar a figurinha. Tente novamente.");
@@ -247,6 +249,20 @@ export default function Album() {
                               )}
                             </div>
 
+                            {/* O Autor (Quem colou) - Estilo Polaroid */}
+                            {typeof memory === 'object' && memory.author && (
+                              <div className="absolute -top-2 -left-2 rotate-[-8deg] z-30 shadow-md bg-white p-[2px] rounded-sm pointer-events-none" style={{ boxShadow: "1px 2px 5px rgba(0,0,0,0.4)" }}>
+                                {memory.author === 'both' ? (
+                                  <div className="flex -space-x-1">
+                                    <img src="/photos/joao.png" className="w-5 h-5 object-cover rounded-[1px] border border-white" alt="João" />
+                                    <img src="/photos/maria.png" className="w-5 h-5 object-cover rounded-[1px] border border-white" alt="Maria" />
+                                  </div>
+                                ) : (
+                                  <img src={`/photos/${memory.author}.png`} className="w-6 h-6 object-cover rounded-[1px]" alt={memory.author} />
+                                )}
+                              </div>
+                            )}
+
                             {/* O Post-it / Polaroid Thumbnail */}
                             {typeof memory === 'object' && (memory.note || memory.photoUrl) && (
                               <button 
@@ -347,6 +363,30 @@ export default function Album() {
 
               <div className="overflow-y-auto flex-1 pr-2 space-y-4 mb-6 custom-scrollbar">
                 
+                {/* Quem Completou */}
+                <div>
+                  <label className="text-xs font-bold text-white/60 uppercase tracking-wider mb-2 flex items-center gap-2">
+                    👤 Quem marcou essa figurinha?
+                  </label>
+                  <div className="flex gap-2">
+                    <button type="button" onClick={() => setMemoryAuthor('joao')} className={`flex-1 p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${memoryAuthor === 'joao' ? 'border-sunset-rose bg-sunset-rose/20 text-white' : 'border-white/10 bg-white/5 text-white/50 hover:bg-white/10'}`}>
+                       <img src="/photos/joao.png" className="w-8 h-8 rounded-full object-cover border border-white/10" /> 
+                       <span className="text-xs font-bold">João</span>
+                    </button>
+                    <button type="button" onClick={() => setMemoryAuthor('maria')} className={`flex-1 p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${memoryAuthor === 'maria' ? 'border-sunset-rose bg-sunset-rose/20 text-white' : 'border-white/10 bg-white/5 text-white/50 hover:bg-white/10'}`}>
+                       <img src="/photos/maria.png" className="w-8 h-8 rounded-full object-cover border border-white/10" /> 
+                       <span className="text-xs font-bold">Maria</span>
+                    </button>
+                    <button type="button" onClick={() => setMemoryAuthor('both')} className={`flex-1 p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${memoryAuthor === 'both' ? 'border-sunset-rose bg-sunset-rose/20 text-white' : 'border-white/10 bg-white/5 text-white/50 hover:bg-white/10'}`}>
+                       <div className="flex -space-x-3">
+                         <img src="/photos/joao.png" className="w-8 h-8 rounded-full object-cover border-2 border-[#111116]" />
+                         <img src="/photos/maria.png" className="w-8 h-8 rounded-full object-cover border-2 border-[#111116]" />
+                       </div> 
+                       <span className="text-xs font-bold">Nós!</span>
+                    </button>
+                  </div>
+                </div>
+
                 {/* Data */}
                 <div>
                   <label className="text-xs font-bold text-white/60 uppercase tracking-wider mb-2 flex items-center gap-2">
@@ -432,9 +472,27 @@ export default function Album() {
               <h2 className="font-display text-2xl font-bold text-white mb-1 text-center">
                 {viewingMemory.sticker.title}
               </h2>
-              <span className="text-xs font-semibold tracking-widest text-sunset-rose uppercase mb-6 text-center">
-                {viewingMemory.memory.date || "Data não registrada"}
-              </span>
+              
+              <div className="flex flex-col items-center gap-2 mb-6">
+                <span className="text-xs font-semibold tracking-widest text-sunset-rose uppercase text-center">
+                  {viewingMemory.memory.date || "Data não registrada"}
+                </span>
+                
+                {/* Quem Completou no Modal */}
+                {viewingMemory.memory.author && (
+                  <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+                    <span className="text-white/40 text-[9px] uppercase tracking-wider font-bold">Por:</span>
+                    {viewingMemory.memory.author === 'both' ? (
+                      <div className="flex -space-x-1.5">
+                        <img src="/photos/joao.png" className="w-4 h-4 object-cover rounded-full border border-white/20" alt="João" />
+                        <img src="/photos/maria.png" className="w-4 h-4 object-cover rounded-full border border-white/20" alt="Maria" />
+                      </div>
+                    ) : (
+                      <img src={`/photos/${viewingMemory.memory.author}.png`} className="w-4 h-4 object-cover rounded-full border border-white/20" alt={viewingMemory.memory.author} />
+                    )}
+                  </div>
+                )}
+              </div>
 
               {/* A Polaroid Fotográfica */}
               <div className="bg-white p-3 md:p-4 rounded-sm shadow-2xl rotate-2 w-full max-w-[260px] mx-auto z-10 flex flex-col">

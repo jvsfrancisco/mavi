@@ -52,7 +52,7 @@ export const stickers = [
   { id: "cozinhar", title: "Cozinhar Juntos", description: "Fazer uma receita do zero.", icon: ChefHat },
   { id: "ceramica", title: "Fazer Cerâmica", description: "Sujar as mãos de argila.", icon: PaintBucket },
   { id: "karaoke", title: "Cantar no Karaokê", description: "Passar vergonha no microfone.", icon: Mic2 },
-  { id: "show", title: "Show Internacional", description: "Ver nossa banda favorita.", icon: Music },
+  { id: "patinacao", title: "Patinação no Gelo", description: "Cair e rir juntos.", icon: Snowflake },
   { id: "spa", title: "Dia de Spa", description: "Massagem e relaxamento total.", icon: Sparkles },
   { id: "acampar", title: "Acampar na Montanha", description: "Dormir em uma barraca.", icon: Mountain },
   { id: "montanharussa", title: "Montanha-Russa", description: "Gritar juntos no parque.", icon: Ticket },
