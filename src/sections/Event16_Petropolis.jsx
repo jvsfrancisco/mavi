@@ -57,7 +57,7 @@ export default function Event16_Petropolis() {
         <div className="glow w-[500px] h-[500px] bg-emerald-600/10 bottom-0 left-0 absolute" />
         <div className="glow w-[400px] h-[400px] bg-amber-500/5 top-1/3 left-1/4 absolute" />
 
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+
       </div>
 
       <FloatingPetropolis scrollProgress={scrollYProgress} />

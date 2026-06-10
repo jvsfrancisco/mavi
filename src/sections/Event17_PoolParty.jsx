@@ -55,7 +55,7 @@ export default function Event17_PoolParty() {
         <div className="glow w-[500px] h-[500px] bg-blue-600/10 bottom-0 left-0 absolute" />
         <div className="glow w-[400px] h-[400px] bg-amber-400/5 top-1/3 left-1/4 absolute" />
 
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
 
       <FloatingPoolParty scrollProgress={scrollYProgress} />

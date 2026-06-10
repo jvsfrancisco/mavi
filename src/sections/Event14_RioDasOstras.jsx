@@ -38,7 +38,7 @@ export default function Event14_RioDasOstras() {
         <div className="glow w-[500px] h-[500px] bg-sky-600/15 bottom-0 left-0 absolute" />
         <div className="glow w-[300px] h-[300px] bg-amber-500/10 top-1/3 left-1/3 absolute" />
 
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+
       </div>
 
       <FloatingBeach scrollProgress={scrollYProgress} />

@@ -90,7 +90,7 @@ export default function Event15_AnoNovo() {
         <div className="glow w-[500px] h-[500px] bg-slate-400/10 bottom-0 left-0 absolute" />
         <div className="glow w-[400px] h-[400px] bg-cyan-600/5 top-1/3 left-1/4 absolute" />
 
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+
       </div>
 
       <FloatingNewYear scrollProgress={scrollYProgress} />
