@@ -42,7 +42,7 @@ const POLAROIDS = [
 
 export default function Event05_NoiteEmCasa() {
   const sectionRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(1); // foto do meio na frente
+  const [activeIndex, setActiveIndex] = useState(null); // foto do meio na frente
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -154,11 +154,13 @@ export default function Event05_NoiteEmCasa() {
         <motion.div
           className="relative h-[420px] md:h-[500px] mb-10"
           style={{ scale: photosScale }}
+          onClick={() => setActiveIndex(null)}
         >
           <div className="relative w-full h-full flex items-center justify-center">
             {POLAROIDS.map((photo, index) => {
               const isActive = activeIndex === index;
-              const zIndex = isActive ? 30 : 10 + index;
+              const hasActive = activeIndex !== null;
+              const zIndex = isActive ? 50 : 10 + index;
 
               return (
                 <motion.div
@@ -175,9 +177,9 @@ export default function Event05_NoiteEmCasa() {
                   whileInView={{
                     opacity: 1,
                     rotate: isActive ? 0 : photo.rotation,
-                    x: photo.offset.x,
-                    y: isActive ? photo.offset.y - 20 : photo.offset.y,
-                    scale: isActive ? 1.05 : 0.85,
+                    x: isActive ? 0 : photo.offset.x,
+                    y: isActive ? -20 : photo.offset.y,
+                    scale: isActive ? 1.15 : 0.85,
                   }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{
@@ -187,19 +189,22 @@ export default function Event05_NoiteEmCasa() {
                   }}
                   animate={{
                     rotate: isActive ? 0 : photo.rotation,
-                    x: photo.offset.x,
-                    y: isActive ? photo.offset.y - 20 : photo.offset.y,
-                    scale: isActive ? 1.05 : 0.85,
-                    filter: isActive
+                    x: isActive ? 0 : photo.offset.x,
+                    y: isActive ? -20 : photo.offset.y,
+                    scale: isActive ? 1.15 : 0.85,
+                    filter: !hasActive || isActive
                       ? "brightness(1) saturate(1)"
-                      : "brightness(0.55) saturate(0.5)",
+                      : "brightness(0.4) saturate(0.5)",
                   }}
                   whileHover={{
-                    scale: isActive ? 1.08 : 0.9,
-                    y: isActive ? photo.offset.y - 25 : photo.offset.y - 10,
-                    filter: "brightness(0.9) saturate(0.8)",
+                    scale: isActive ? 1.18 : 0.9,
+                    y: isActive ? -25 : photo.offset.y - 10,
+                    filter: "brightness(1) saturate(1)",
                   }}
-                  onClick={() => bringToFront(index)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveIndex(isActive ? null : index);
+                  }}
                 >
                   {/* Polaroid frame */}
                   <div className="bg-white/[0.04] backdrop-blur-sm border border-white/10 rounded-xl p-2 pb-7 shadow-2xl shadow-black/50">
@@ -219,17 +224,6 @@ export default function Event05_NoiteEmCasa() {
               );
             })}
           </div>
-
-          {/* Indicador sutil */}
-          <motion.p
-            className="absolute -bottom-2 left-0 right-0 text-center text-white/15 text-xs tracking-widest"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "200px" }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-          >
-            CLIQUE NAS FOTOS
-          </motion.p>
         </motion.div>
 
         {/* ---- Texto (abaixo das polaroids, largura total) ---- */}

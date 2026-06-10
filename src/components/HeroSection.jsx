@@ -94,17 +94,8 @@ export default function HeroSection() {
           Tudo que a gente viveu nesse primeiro ano. Cada rolê, cada momento.
         </motion.p>
 
-        {/* Linha do tempo decorativa */}
-        <motion.div
-          className="mt-12 flex items-center justify-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
-        >
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-white/20" />
-          <span className="text-xs text-white/30 tracking-widest uppercase">Role para baixo</span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-white/20" />
-        </motion.div>
+        {/* Espaçamento extra no lugar do texto 'Role para baixo' */}
+        <div className="mt-12" />
       </motion.div>
 
       {/* ---- Seta de scroll animada ---- */}

@@ -174,7 +174,7 @@ export default function Event02_Pizzaria() {
                   title="Clica na pizza 👀"
                 >
                   🍕🕯️
-                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/80 backdrop-blur-md text-amber-300 text-[10px] px-3 py-1 rounded-full border border-amber-500/20 opacity-0 group-hover/tip:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/80 backdrop-blur-md text-amber-300 text-[10px] px-3 py-1 rounded-full border border-amber-500/20 opacity-0 group-hover/tip:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
                     Ela roubou mais que um pedaço...
                   </span>
                 </span>
@@ -212,14 +212,16 @@ export default function Event02_Pizzaria() {
               <div className="absolute -inset-1 bg-gradient-to-br from-red-600/20 via-transparent to-amber-500/20 rounded-[1.75rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
 
               {/* Container do vídeo */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[9/16] w-full max-w-[340px] mx-auto bg-neutral-900 border border-white/10 shadow-2xl">
+              <div className="relative rounded-[16px] overflow-hidden aspect-[9/16] w-full max-w-[340px] mx-auto bg-neutral-900 shadow-[0_0_40px_rgba(0,0,0,0.6)]">
                 <iframe
-                  src="https://www.youtube.com/embed/fI86X3i3ZQ0?autoplay=0&loop=1&playlist=fI86X3i3ZQ0&controls=1&modestbranding=1&rel=0"
+                  src="https://www.youtube.com/embed/fI86X3i3ZQ0?autoplay=0&loop=1&playlist=fI86X3i3ZQ0&controls=0&modestbranding=1&rel=0"
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  className="absolute inset-0 w-full h-full"
+                  className="absolute inset-0 w-full h-full border-0 z-0"
                 ></iframe>
+                {/* Overlay sutil para esconder título do YouTube */}
+                <div className="absolute top-0 inset-x-0 h-[100px] bg-gradient-to-b from-black/95 via-black/80 to-transparent pointer-events-none z-20" />
               </div>
 
               {/* Legenda do vídeo */}
