@@ -32,8 +32,8 @@ function Main() {
     return <LoginScreen />;
   }
 
-  // Se estiver logado, a home dele é o Roadmap!
-  return <Roadmap />;
+  // Se estiver logado, redireciona para a rota /roadmap
+  return <Navigate to="/roadmap" replace />;
 }
 
 export default function App() {
