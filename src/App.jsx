@@ -6,6 +6,7 @@ import Roadmap from "./pages/Roadmap";
 import Album from "./pages/Album";
 import Map from "./pages/Map";
 import FloatingNavBar from "./components/FloatingNavBar";
+import ReloadPrompt from "./components/ReloadPrompt";
 
 // Componente para proteger rotas
 function ProtectedRoute({ children }) {
@@ -65,6 +66,7 @@ export default function App() {
           </Routes>
           
           <FloatingNavBar />
+          <ReloadPrompt />
         </div>
       </Router>
     </AuthProvider>

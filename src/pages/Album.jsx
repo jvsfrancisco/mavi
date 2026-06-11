@@ -446,8 +446,11 @@ export default function Album() {
                   </div>
                   
                   {memoryFile && (
-                    <div className="text-xs text-white/50 text-center bg-white/5 rounded-lg py-1 px-2 border border-white/5 truncate">
-                      Selecionado: {memoryFile.name}
+                    <div className="mt-2 w-full max-h-[200px] flex justify-center bg-black/20 border border-white/10 rounded-xl overflow-hidden relative">
+                      <img src={URL.createObjectURL(memoryFile)} className="h-full max-h-[200px] object-contain" alt="Preview" />
+                      <button type="button" onClick={() => setMemoryFile(null)} className="absolute top-2 right-2 bg-black/60 p-1.5 rounded-full text-white hover:text-sunset-rose">
+                        <X className="w-4 h-4" />
+                      </button>
                     </div>
                   )}
                 </div>

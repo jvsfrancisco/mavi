@@ -8,7 +8,7 @@ import { db } from "../lib/firebase";
 import { onSnapshot, collection, addDoc } from "firebase/firestore";
 import { roadmapLocations } from "../data/roadmapLocations";
 
-const createPhotoIcon = (photoUrl) => L.divIcon({
+const createPhotoIcon = (photoUrl, count = 1) => L.divIcon({
   className: "custom-photo-icon",
   html: `<div style="
     width: 48px; 
@@ -20,7 +20,27 @@ const createPhotoIcon = (photoUrl) => L.divIcon({
     background-size: cover;
     background-position: center;
     transform: rotate(${-5 + Math.random() * 10}deg);
-  "></div>`,
+    position: relative;
+  ">
+    ${count > 1 ? `<div style="
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #FF4D6D;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 12px;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      font-family: sans-serif;
+    ">${count}</div>` : ''}
+  </div>`,
   iconSize: [48, 48],
   iconAnchor: [24, 24],
 });
@@ -74,6 +94,7 @@ export default function MapPage() {
   const [loading, setLoading] = useState(true);
   const [geoData, setGeoData] = useState(null);
   const [viewingMemory, setViewingMemory] = useState(null);
+  const [viewingGroup, setViewingGroup] = useState(null);
   const [currentZoom, setCurrentZoom] = useState(5);
   const [isLocating, setIsLocating] = useState(false);
 
@@ -326,46 +347,69 @@ export default function MapPage() {
             />
           )}
 
-          {/* Marcadores Fixos do Roadmap */}
-          {currentZoom >= 8 && roadmapLocations.map((loc) => {
-            if (!loc.photoUrl) return null; 
-            const position = [loc.coordinates[1], loc.coordinates[0]];
-            return (
-              <Marker 
-                key={loc.id} 
-                position={position} 
-                icon={createPhotoIcon(loc.photoUrl)}
-                eventHandlers={{
-                  click: () => {
-                    setViewingMemory({ 
-                      geo: { properties: { name: loc.title } }, 
-                      memory: { photoUrl: loc.photoUrl, date: loc.date, note: loc.note || "", author: loc.author } 
-                    });
-                  }
-                }}
-              />
-            );
-          })}
+          {/* Marcadores Agrupados */}
+          {(() => {
+            if (currentZoom < 8) return null;
+            const allMemories = [];
+            roadmapLocations.forEach(loc => {
+              if (!loc.photoUrl) return;
+              allMemories.push({
+                id: loc.id,
+                lat: loc.coordinates[1],
+                lng: loc.coordinates[0],
+                photoUrl: loc.photoUrl,
+                date: loc.date,
+                note: loc.note || "",
+                author: loc.author,
+                stateName: loc.locationName || loc.title,
+                sigla: loc.state
+              });
+            });
+            pins.forEach(pin => {
+              if (!pin.photoUrl) return;
+              allMemories.push({
+                id: pin.id,
+                lat: pin.lat,
+                lng: pin.lng,
+                photoUrl: pin.photoUrl,
+                date: pin.date,
+                note: pin.note,
+                author: pin.author,
+                stateName: pin.stateName,
+                sigla: pin.sigla
+              });
+            });
 
-          {/* Marcadores MANUAIS (criados pelo usuário) */}
-          {currentZoom >= 8 && pins.map((pin) => {
-            if (!pin.photoUrl) return null;
-            return (
-              <Marker 
-                key={pin.id} 
-                position={[pin.lat, pin.lng]} 
-                icon={createPhotoIcon(pin.photoUrl)}
-                eventHandlers={{
-                  click: () => {
-                    setViewingMemory({ 
-                      geo: { properties: { name: pin.stateName } }, 
-                      memory: pin 
-                    });
-                  }
-                }}
-              />
-            );
-          })}
+            const groupedMemories = {};
+            allMemories.forEach(mem => {
+              const key = `${mem.lat.toFixed(4)},${mem.lng.toFixed(4)}`;
+              if (!groupedMemories[key]) groupedMemories[key] = [];
+              groupedMemories[key].push(mem);
+            });
+
+            return Object.values(groupedMemories).map((group, idx) => {
+              const firstMem = group[0];
+              return (
+                <Marker 
+                  key={`group-${idx}`} 
+                  position={[firstMem.lat, firstMem.lng]} 
+                  icon={createPhotoIcon(firstMem.photoUrl, group.length)}
+                  eventHandlers={{
+                    click: () => {
+                      if (group.length === 1) {
+                        setViewingMemory({ 
+                          geo: { properties: { name: firstMem.stateName } }, 
+                          memory: firstMem 
+                        });
+                      } else {
+                        setViewingGroup(group);
+                      }
+                    }
+                  }}
+                />
+              );
+            });
+          })()}
 
         </MapContainer>
       </div>
@@ -503,8 +547,11 @@ export default function MapPage() {
                   </div>
 
                   {memoryFile && (
-                    <div className="text-xs text-white/50 text-center bg-white/5 rounded-lg py-1 px-2 border border-white/5 truncate">
-                      Selecionado: {memoryFile.name}
+                    <div className="mt-2 w-full max-h-[200px] flex justify-center bg-black/20 border border-white/10 rounded-xl overflow-hidden relative">
+                      <img src={URL.createObjectURL(memoryFile)} className="h-full max-h-[200px] object-contain" alt="Preview" />
+                      <button type="button" onClick={() => setMemoryFile(null)} className="absolute top-2 right-2 bg-black/60 p-1.5 rounded-full text-white hover:text-sunset-rose">
+                        <X className="w-4 h-4" />
+                      </button>
                     </div>
                   )}
                 </div>
@@ -516,7 +563,7 @@ export default function MapPage() {
                 disabled={isUploading}
                 className="w-full py-4 rounded-xl bg-gradient-to-r from-sunset-orange to-sunset-rose text-white font-bold transition-opacity hover:opacity-90 flex items-center justify-center gap-2 shadow-lg disabled:opacity-50"
               >
-                {isUploading ? "Cravando no Mapa..." : <><Check className="w-5 h-5" /> Adicionar ao Mapa!</>}
+                {isUploading ? "Gravando no Mapa..." : <><Check className="w-5 h-5" /> Adicionar ao Mapa!</>}
               </button>
 
             </motion.form>
@@ -583,6 +630,61 @@ export default function MapPage() {
                 </div>
               </div>
 
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Modal de Seleção de Grupo */}
+      <AnimatePresence>
+        {viewingGroup && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+            onClick={() => setViewingGroup(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={e => e.stopPropagation()}
+              className="bg-[#111116]/95 border border-white/10 rounded-3xl p-6 w-full max-w-sm flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.5)] relative max-h-[80vh]"
+            >
+              <button onClick={() => setViewingGroup(null)} className="absolute top-4 right-4 text-white/30 hover:text-white transition-colors z-20">
+                <X className="w-6 h-6" />
+              </button>
+
+              <div className="flex items-center gap-2 mb-6 mt-2 pr-8">
+                <MapPin className="w-5 h-5 text-sunset-orange shrink-0" />
+                <h2 className="font-display text-xl font-bold text-white">
+                  {viewingGroup.length} Memórias em {viewingGroup[0].stateName}
+                </h2>
+              </div>
+
+              <div className="overflow-y-auto custom-scrollbar flex-1 grid grid-cols-2 gap-3 pb-2">
+                {viewingGroup.map((mem, i) => (
+                  <div 
+                    key={i} 
+                    className="cursor-pointer group relative rounded-xl overflow-hidden aspect-square border border-white/10"
+                    onClick={() => {
+                      setViewingGroup(null);
+                      setTimeout(() => {
+                        setViewingMemory({ 
+                          geo: { properties: { name: mem.stateName } }, 
+                          memory: mem 
+                        });
+                      }, 200);
+                    }}
+                  >
+                    <img src={mem.photoUrl} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Recordação" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-white text-[10px] font-bold">{mem.date}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
         )}
