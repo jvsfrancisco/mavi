@@ -25,13 +25,6 @@ function ProtectedRoute({ children }) {
 // O componente Main define o que aparece na raiz ("/")
 function Main() {
   const { user, loading } = useAuth();
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!loading && user) {
-      navigate('/roadmap', { replace: true });
-    }
-  }, [user, loading, navigate]);
 
   if (loading) return <div className="min-h-screen bg-[#060608]" />;
 
@@ -40,8 +33,8 @@ function Main() {
     return <LoginScreen />;
   }
 
-  // Tela preta enquanto o useEffect dispara o redirect
-  return <div className="min-h-screen bg-[#060608]" />;
+  // Se estiver logado, a home dele é o Roadmap!
+  return <Roadmap />;
 }
 
 export default function App() {
@@ -51,15 +44,6 @@ export default function App() {
         <div className="bg-[#060608] min-h-screen">
           <Routes>
             <Route path="/" element={<Main />} />
-            
-            <Route 
-              path="/roadmap" 
-              element={
-                <ProtectedRoute>
-                  <Roadmap />
-                </ProtectedRoute>
-              } 
-            />
             
             <Route 
               path="/album" 

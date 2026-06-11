@@ -12,7 +12,7 @@ export default function FloatingNavBar() {
   if (!user) return null; 
 
   const navItems = [
-    { name: "Histórico", path: "/roadmap", icon: Clock },
+    { name: "Histórico", path: "/", icon: Clock },
     { name: "Álbum", path: "/album", icon: BookOpen },
     { name: "Mapa", path: "/map", icon: Map },
   ];
@@ -26,7 +26,7 @@ export default function FloatingNavBar() {
     >
       <div className="flex items-center gap-1">
         {navItems.map((item) => {
-          const isActive = location.pathname === item.path || (location.pathname === "/" && item.path === "/roadmap");
+          const isActive = location.pathname === item.path;
           const isHovered = hoveredPath === item.path;
 
           return (
