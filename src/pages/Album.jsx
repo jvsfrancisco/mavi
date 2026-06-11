@@ -15,7 +15,7 @@ for (let i = 0; i < stickers.length; i += STICKERS_PER_PAGE) {
 
 // Utilitário para comprimir a foto no próprio navegador (bypass do Firebase Storage)
 const compressImage = (file) => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (event) => {
@@ -48,7 +48,11 @@ const compressImage = (file) => {
         // Comprime para JPEG com 60% de qualidade (gera uma string base64 de ~30kb a 50kb)
         resolve(canvas.toDataURL("image/jpeg", 0.6));
       };
+      img.onerror = () => {
+        reject(new Error("Formato de imagem não suportado."));
+      };
     };
+    reader.onerror = () => reject(new Error("Erro ao ler o arquivo."));
   });
 };
 
@@ -115,7 +119,7 @@ export default function Album() {
       setMemoryAuthor("both");
     } catch (error) {
       console.error("Erro ao salvar memória:", error);
-      alert("Houve um erro ao colar a figurinha. Tente novamente.");
+      alert("Erro ao colar a figurinha: " + (error.message || "Desconhecido"));
     } finally {
       setIsUploading(false);
     }
@@ -423,7 +427,7 @@ export default function Album() {
                       <span className="text-xs md:text-sm font-bold">Tirar Foto</span>
                       <input 
                         type="file" 
-                        accept="image/*"
+                        accept="image/jpeg, image/png, image/webp"
                         capture="environment"
                         onChange={e => setMemoryFile(e.target.files[0])}
                         className="absolute inset-0 opacity-0 cursor-pointer"
@@ -434,7 +438,7 @@ export default function Album() {
                       <span className="text-xs md:text-sm font-bold">Galeria</span>
                       <input 
                         type="file" 
-                        accept="image/*"
+                        accept="image/jpeg, image/png, image/webp"
                         onChange={e => setMemoryFile(e.target.files[0])}
                         className="absolute inset-0 opacity-0 cursor-pointer"
                       />

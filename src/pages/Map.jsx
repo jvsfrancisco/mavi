@@ -27,7 +27,7 @@ const createPhotoIcon = (photoUrl) => L.divIcon({
 
 // Compressão de foto para não estourar o limite do Firestore
 const compressImage = (file) => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (event) => {
@@ -52,7 +52,11 @@ const compressImage = (file) => {
         ctx.drawImage(img, 0, 0, width, height);
         resolve(canvas.toDataURL("image/jpeg", 0.6));
       };
+      img.onerror = () => {
+        reject(new Error("Formato de imagem não suportado pelo navegador. Tente outra foto."));
+      };
     };
+    reader.onerror = () => reject(new Error("Erro ao ler o arquivo."));
   });
 };
 
@@ -223,7 +227,7 @@ export default function MapPage() {
       setMemoryAuthor("both");
     } catch (error) {
       console.error("Erro ao salvar pin:", error);
-      alert("Erro ao fixar o pin no mapa. Tente novamente.");
+      alert("Erro ao fixar no mapa: " + (error.message || "Desconhecido"));
     } finally {
       setIsUploading(false);
     }
@@ -480,7 +484,7 @@ export default function MapPage() {
                       <span className="text-xs md:text-sm font-bold">Tirar Foto</span>
                       <input 
                         type="file" 
-                        accept="image/*"
+                        accept="image/jpeg, image/png, image/webp"
                         capture="environment"
                         onChange={e => setMemoryFile(e.target.files[0])}
                         className="absolute inset-0 opacity-0 cursor-pointer"
@@ -491,7 +495,7 @@ export default function MapPage() {
                       <span className="text-xs md:text-sm font-bold">Galeria</span>
                       <input 
                         type="file" 
-                        accept="image/*"
+                        accept="image/jpeg, image/png, image/webp"
                         onChange={e => setMemoryFile(e.target.files[0])}
                         className="absolute inset-0 opacity-0 cursor-pointer"
                       />
