@@ -42,6 +42,15 @@ export default function Event03_Mirante() {
   const nextPhoto = () => setCurrentPhoto((prev) => (prev + 1) % PHOTOS.length);
   const prevPhoto = () => setCurrentPhoto((prev) => (prev - 1 + PHOTOS.length) % PHOTOS.length);
 
+  const handleDragEnd = (e, { offset, velocity }) => {
+    const swipe = Math.abs(offset.x) * velocity.x;
+    if (swipe < -1000 || offset.x < -50) {
+      nextPhoto();
+    } else if (swipe > 1000 || offset.x > 50) {
+      prevPhoto();
+    }
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -61,7 +70,7 @@ export default function Event03_Mirante() {
               #3b82f6 55%,
               #1d4ed8 65%,
               #1e3a5f 78%,
-              #0f1f3d 100%,)`,
+              #0f1f3d 100%,)`,
             opacity: 0.5,
           }}
         />
@@ -151,6 +160,12 @@ export default function Event03_Mirante() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={handleDragEnd}
+                    style={{ cursor: "grab" }}
+                    whileTap={{ cursor: "grabbing" }}
                   />
                 </AnimatePresence>
 

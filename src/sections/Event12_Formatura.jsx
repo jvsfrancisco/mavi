@@ -39,6 +39,15 @@ export default function Event12_Formatura() {
     setCurrentPhoto((prev) => (prev === 0 ? PHOTOS.length - 1 : prev - 1));
   };
 
+  const handleDragEnd = (e, { offset, velocity }) => {
+    const swipe = Math.abs(offset.x) * velocity.x;
+    if (swipe < -1000 || offset.x < -50) {
+      nextPhoto();
+    } else if (swipe > 1000 || offset.x > 50) {
+      prevPhoto();
+    }
+  };
+
   const triggerConfetti = () => {
     const capelo = confetti.shapeFromText({ text: '🎓', scalar: 6 });
 
@@ -204,6 +213,12 @@ export default function Event12_Formatura() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={handleDragEnd}
+                    style={{ cursor: "grab" }}
+                    whileTap={{ cursor: "grabbing" }}
                   />
                 </AnimatePresence>
 
