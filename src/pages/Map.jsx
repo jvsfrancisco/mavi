@@ -367,7 +367,7 @@ export default function MapPage() {
       </div>
 
       {/* Botão de Localização GPS */}
-      <div className="absolute bottom-6 right-4 md:right-8 z-[1000]">
+      <div className="absolute bottom-28 md:bottom-8 right-4 md:right-8 z-[1000]">
         <button 
           onClick={handleGetCurrentLocation}
           disabled={isLocating}
