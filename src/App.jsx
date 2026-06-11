@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import LoginScreen from "./components/LoginScreen";
 import Roadmap from "./pages/Roadmap";
@@ -24,16 +25,23 @@ function ProtectedRoute({ children }) {
 // O componente Main define o que aparece na raiz ("/")
 function Main() {
   const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!loading && user) {
+      navigate('/roadmap', { replace: true });
+    }
+  }, [user, loading, navigate]);
 
   if (loading) return <div className="min-h-screen bg-[#060608]" />;
 
-  // Se não estiver logado, mostra a tela de Login (com a identidade visual original)
+  // Se não estiver logado, mostra a tela de Login
   if (!user) {
     return <LoginScreen />;
   }
 
-  // Se estiver logado, redireciona para a rota /roadmap
-  return <Navigate to="/roadmap" replace />;
+  // Tela preta enquanto o useEffect dispara o redirect
+  return <div className="min-h-screen bg-[#060608]" />;
 }
 
 export default function App() {
