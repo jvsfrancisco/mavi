@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Sparkles, Check, Lock, ChevronLeft, ChevronRight, Image as ImageIcon, Calendar, FileText, StickyNote, X } from "lucide-react";
+import { BookOpen, Sparkles, Check, Lock, ChevronLeft, ChevronRight, Image as ImageIcon, Calendar, FileText, StickyNote, X, Camera } from "lucide-react";
 import { stickers } from "../data/stickers.jsx";
 import { db } from "../lib/firebase";
 import FloatingAlbumElements from "../components/FloatingAlbumElements.jsx";
@@ -416,17 +416,36 @@ export default function Album() {
                   <label className="text-xs font-bold text-white/60 uppercase tracking-wider mb-2 flex items-center gap-2">
                     <ImageIcon className="w-4 h-4" /> Foto de recordação
                   </label>
-                  <div className="relative w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors">
-                    <span className="truncate text-sm opacity-70">
-                      {memoryFile ? memoryFile.name : "Nenhuma foto escolhida..."}
-                    </span>
-                    <input 
-                      type="file" 
-                      accept="image/*"
-                      onChange={e => setMemoryFile(e.target.files[0])}
-                      className="absolute inset-0 opacity-0 cursor-pointer"
-                    />
+                  
+                  <div className="flex gap-2 mb-2">
+                    <div className="relative flex-1 bg-white/5 border border-white/10 rounded-xl py-3 px-2 text-white flex items-center justify-center cursor-pointer hover:bg-white/10 transition-colors">
+                      <Camera className="w-4 h-4 mr-2 text-sunset-orange" />
+                      <span className="text-xs md:text-sm font-bold">Tirar Foto</span>
+                      <input 
+                        type="file" 
+                        accept="image/*"
+                        capture="environment"
+                        onChange={e => setMemoryFile(e.target.files[0])}
+                        className="absolute inset-0 opacity-0 cursor-pointer"
+                      />
+                    </div>
+                    <div className="relative flex-1 bg-white/5 border border-white/10 rounded-xl py-3 px-2 text-white flex items-center justify-center cursor-pointer hover:bg-white/10 transition-colors">
+                      <ImageIcon className="w-4 h-4 mr-2 text-sunset-rose" />
+                      <span className="text-xs md:text-sm font-bold">Galeria</span>
+                      <input 
+                        type="file" 
+                        accept="image/*"
+                        onChange={e => setMemoryFile(e.target.files[0])}
+                        className="absolute inset-0 opacity-0 cursor-pointer"
+                      />
+                    </div>
                   </div>
+                  
+                  {memoryFile && (
+                    <div className="text-xs text-white/50 text-center bg-white/5 rounded-lg py-1 px-2 border border-white/5 truncate">
+                      Selecionado: {memoryFile.name}
+                    </div>
+                  )}
                 </div>
 
               </div>
