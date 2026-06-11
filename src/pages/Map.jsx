@@ -167,18 +167,29 @@ export default function MapPage() {
             let sigla = "BR"; 
 
             if (data && data.address) {
-              stateName = data.address.state || data.address.city || data.address.town || "Localização Atual";
+              let detailedName = "Localização Atual";
+              let stateQuery = data.address.state || data.address.city || "";
               
-              if (geoData) {
+              const localPart = data.address.suburb || data.address.city_district || data.address.town || data.address.village || data.address.city || data.address.municipality;
+              const statePart = data.address.state || "";
+              
+              if (localPart && statePart && localPart !== statePart) {
+                detailedName = `${localPart}, ${statePart}`;
+              } else if (localPart || statePart) {
+                detailedName = localPart || statePart;
+              }
+
+              if (geoData && stateQuery) {
                 const foundState = geoData.features.find(f => 
-                  f.properties.name.toLowerCase() === stateName.toLowerCase() ||
-                  stateName.toLowerCase().includes(f.properties.name.toLowerCase())
+                  f.properties.name.toLowerCase() === stateQuery.toLowerCase() ||
+                  stateQuery.toLowerCase().includes(f.properties.name.toLowerCase())
                 );
                 if (foundState) {
                   sigla = foundState.properties.sigla;
-                  stateName = foundState.properties.name;
                 }
               }
+              
+              stateName = detailedName;
             }
 
             setSelectedState({
