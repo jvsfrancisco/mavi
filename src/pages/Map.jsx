@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, GeoJSON, useMapEvents } from "react-le
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { motion, AnimatePresence } from "framer-motion";
-import { Map as MapIcon, X, MapPin, Calendar, FileText, Image as ImageIcon, Check, Camera } from "lucide-react";
+import { Map as MapIcon, X, MapPin, Calendar, FileText, Image as ImageIcon, Check, Camera, Navigation, User } from "lucide-react";
 import { db } from "../lib/firebase";
 import { onSnapshot, collection, addDoc } from "firebase/firestore";
 import { roadmapLocations } from "../data/roadmapLocations";
@@ -71,6 +71,7 @@ export default function MapPage() {
   const [geoData, setGeoData] = useState(null);
   const [viewingMemory, setViewingMemory] = useState(null);
   const [currentZoom, setCurrentZoom] = useState(5);
+  const [isLocating, setIsLocating] = useState(false);
 
   // Modal de Criação
   const [selectedState, setSelectedState] = useState(null);
@@ -125,6 +126,63 @@ export default function MapPage() {
         });
       }
     });
+  };
+
+  const handleGetCurrentLocation = () => {
+    if ("geolocation" in navigator) {
+      setIsLocating(true);
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+            const data = await res.json();
+            
+            let stateName = "Localização Desconhecida";
+            let sigla = "BR"; 
+
+            if (data && data.address) {
+              stateName = data.address.state || data.address.city || data.address.town || "Localização Atual";
+              
+              if (geoData) {
+                const foundState = geoData.features.find(f => 
+                  f.properties.name.toLowerCase() === stateName.toLowerCase() ||
+                  stateName.toLowerCase().includes(f.properties.name.toLowerCase())
+                );
+                if (foundState) {
+                  sigla = foundState.properties.sigla;
+                  stateName = foundState.properties.name;
+                }
+              }
+            }
+
+            setSelectedState({
+              sigla: sigla,
+              name: stateName,
+              lat: latitude,
+              lng: longitude
+            });
+          } catch (err) {
+            console.error("Erro no Nominatim:", err);
+            setSelectedState({
+              sigla: "BR",
+              name: "Localização pelo GPS",
+              lat: latitude,
+              lng: longitude
+            });
+          } finally {
+            setIsLocating(false);
+          }
+        },
+        (error) => {
+          setIsLocating(false);
+          alert("Não foi possível obter a localização. Verifique as permissões de GPS.");
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    } else {
+      alert("Geolocalização não é suportada neste navegador.");
+    }
   };
 
   const handleSavePin = async (e) => {
@@ -308,6 +366,24 @@ export default function MapPage() {
         </MapContainer>
       </div>
 
+      {/* Botão de Localização GPS */}
+      <div className="absolute bottom-6 right-4 md:right-8 z-[1000]">
+        <button 
+          onClick={handleGetCurrentLocation}
+          disabled={isLocating}
+          className="bg-gradient-to-r from-sunset-orange to-sunset-rose text-white px-4 md:px-6 py-3 rounded-full shadow-[0_0_20px_rgba(255,107,107,0.4)] flex items-center justify-center gap-2 hover:scale-105 transition-all disabled:opacity-50 disabled:hover:scale-100 border border-white/20"
+        >
+          {isLocating ? (
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          ) : (
+            <Navigation className="w-5 h-5" />
+          )}
+          <span className="font-bold text-sm">
+            {isLocating ? "Buscando..." : "Usar GPS"}
+          </span>
+        </button>
+      </div>
+
       {/* MODAL DE ADICIONAR NOVA LEMBRANÇA */}
       <AnimatePresence>
         {selectedState && (
@@ -348,7 +424,7 @@ export default function MapPage() {
                 
                 <div>
                   <label className="text-xs font-bold text-white/60 uppercase tracking-wider mb-2 flex items-center gap-2">
-                    👤 Quem viajou pra cá?
+                    <User className="w-4 h-4" /> Quem viajou pra cá?
                   </label>
                   <div className="flex gap-2">
                     <button type="button" onClick={() => setMemoryAuthor('joao')} className={`flex-1 p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${memoryAuthor === 'joao' ? 'border-sunset-rose bg-sunset-rose/20 text-white' : 'border-white/10 bg-white/5 text-white/50 hover:bg-white/10'}`}>

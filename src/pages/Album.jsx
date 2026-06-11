@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Sparkles, Check, Lock, ChevronLeft, ChevronRight, Image as ImageIcon, Calendar, FileText, StickyNote, X, Camera } from "lucide-react";
+import { BookOpen, Sparkles, Check, Lock, ChevronLeft, ChevronRight, Image as ImageIcon, Calendar, FileText, StickyNote, X, Camera, User } from "lucide-react";
 import { stickers } from "../data/stickers.jsx";
 import { db } from "../lib/firebase";
 import FloatingAlbumElements from "../components/FloatingAlbumElements.jsx";
@@ -364,7 +364,7 @@ export default function Album() {
                 {/* Quem Completou */}
                 <div>
                   <label className="text-xs font-bold text-white/60 uppercase tracking-wider mb-2 flex items-center gap-2">
-                    👤 Quem marcou essa figurinha?
+                    <User className="w-4 h-4" /> Quem marcou essa figurinha?
                   </label>
                   <div className="flex gap-2">
                     <button type="button" onClick={() => setMemoryAuthor('joao')} className={`flex-1 p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${memoryAuthor === 'joao' ? 'border-sunset-rose bg-sunset-rose/20 text-white' : 'border-white/10 bg-white/5 text-white/50 hover:bg-white/10'}`}>
