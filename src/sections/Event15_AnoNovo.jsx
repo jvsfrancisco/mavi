@@ -171,8 +171,8 @@ export default function Event15_AnoNovo() {
 
               <div className="space-y-4 relative z-10">
                 <p className="text-white/60 leading-relaxed text-sm md:text-base">
-                  Passar o primeiro Ano Novo juntos já seria especial, mas levar
-                  você pra passar com a minha família na Praia da Tartaruga deixou
+                  Passar o primeiro Ano Novo juntos com minha família já seria especial, mas levar
+                  você pra passar em Rio das Ostras, na Praia da Tartaruga deixou
                   tudo com gosto de tradição. 
                 </p>
                 <p className="text-white/60 leading-relaxed text-sm md:text-base">

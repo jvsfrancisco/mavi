@@ -9,6 +9,10 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const startDate = new Date('2025-06-07T00:00:00');
+  const diffTime = new Date() - startDate;
+  const daysTogether = Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) return;
@@ -81,7 +85,7 @@ export default function LoginScreen() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Um ano de
+          {daysTogether} dias de
         </motion.p>
 
         <motion.h1

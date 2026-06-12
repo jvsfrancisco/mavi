@@ -12,6 +12,11 @@ export default function HeroSection() {
   const titleY = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  const startDate = new Date('2025-06-07T00:00:00');
+  const today = new Date();
+  const diffTime = today - startDate;
+  const daysTogether = Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
+
   return (
     <section
       ref={ref}
@@ -61,7 +66,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Um ano de
+          {daysTogether} dias de
         </motion.p>
 
         <motion.h1
@@ -81,7 +86,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          Tudo que a gente viveu nesse primeiro ano. Cada rolê, cada momento.
+          Tudo que a gente viveu desde que começamos. Cada rolê, cada momento.
         </motion.p>
 
         <div className="mt-12" />

@@ -222,7 +222,7 @@ export default function Event16_Petropolis() {
 
               <div className="space-y-4 relative z-10">
                 <p className="text-white/60 leading-relaxed text-sm md:text-base">
-                  Comemorar o meu segundo aniversário ao seu lado pedia algo diferente, 
+                  Comemorar o seu segundo aniversário pedia algo diferente, 
                   e a serra foi o lugar perfeito. Fomos conhecer a Cidade Imperial de Petrópolis, 
                   passeando de mãos dadas por palácios de cristal e catedrais.
                 </p>
